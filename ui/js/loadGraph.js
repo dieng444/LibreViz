@@ -1,7 +1,7 @@
 function loadGraph(dataFile)
 {
-    var width = 800,// window.innerWidth,
-        height = 600;// window.innerHeight;
+    var width = 780,// window.innerWidth,
+        height = 620;// window.innerHeight;
 
     // var color = d3.scale.ordinal();
 
