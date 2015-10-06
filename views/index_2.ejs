@@ -1,114 +1,29 @@
 <!DOCTYPE html>
-	<html>
-		<head>
+    <html>
+        <head>
         <meta charset="utf-8" />
         <title>Projet crawling</title>
-        <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+        <meta name="author" content="Macky Dieng, Baptiste Vannesson">
         <link rel="stylesheet" href="css/style.css" media="all">
+        <link rel="stylesheet" href="semantic/dist/semantic.min.css">
+        <link rel="stylesheet" href="semantic/dist/components/sidebar.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="semantic/dist/semantic.min.js"></script>
+        <script src="semantic/dist/components/sidebar.min.js"></script>
+        <script>
+            $('.ui.labeled.icon.sidebar').sidebar('toggle');
+        </script>
    </head>
     <body>
-    	<header class="well well-lg">
-			<h1>Projet crawling</h1>
-			<p>Membre du groupe : Baptiste Vannesson &amp; Macky Dieng</p>
-    	</header>
-    	<script src="js/d3.min.js"></script>
-<!--
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
--->
-        <script>
-
-            function loadGraph(dataFile)
-            {
-				var width = 960,// window.innerWidth,
-					height = 600;// window.innerHeight;
-				
-				// var color = d3.scale.ordinal();
-
-				var force = d3.layout.force()
-					.charge(-2000)
-					.gravity(0.1)
-					.linkDistance(180)
-					.size([width, height]);
-					
-				
-				var svg = d3.select("body").append("svg")
-					.attr("width", width)
-					.attr("height", height);
-
-				d3.json(dataFile, function(error, graph) {
-				  if (error) throw error;
-				
-				  force
-					  .nodes(graph.nodes)
-					  .links(graph.links)
-					  .start();
-				 
-				 //console.log(graph.links);return;
-				  var link = svg.selectAll(".link")
-					  .data(graph.links)
-					.enter().append("line")
-					  .attr("class", "link")
-
-				  var gnodes = svg.selectAll('g.gnode')
-					  .data(graph.nodes)
-					  .enter()
-					  .append('g')
-					  .classed('gnode', true);
-					  
-				  /*var foreignObject = gnodes.append("foreignObject")
-					  //.data(graph.nodes)
-					  .attr("width", 100)
-					  .attr("height", 100);*/
-					  
-				  //var a = foreignObject.append('');
-					  //.attr('href',"/"+function(d) { return d.name; })
-					   //.text(function(d) { return d.name; });
-					  
-				  var node = gnodes.append("circle")
-					  .attr("class", "node")
-					  .attr("r", 35)
-					  .on("click", function(d) { location.href = "/"+d.name;})
-					  // .style("fill", function(d) { return color(d.group); })
-					  .call(force.drag);
-
-				  var labels = gnodes.append("text")
-					  .attr("x", 0)
-					  .attr("y", -39)
-					  .on("click", function(d) { location.href = "/"+d.name})
-					  .text(function(d) { return d.name; });
-					  
-				var images = gnodes.append("image")
-				  .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Wilber-gimp.png/96px-Wilber-gimp.png")
-                  .attr("x", 0)
-                  .attr("y", 0)
-                  .attr("width", 80)
-                  .attr("height", 80)
-                  .on("click", function(d) {alert(d.name);});
-
-				  force.on("tick", function() {
-					link.attr("x1", function(d) { return d.source.x; })
-						.attr("y1", function(d) { return d.source.y; })
-						.attr("x2", function(d) { return d.target.x; })
-						.attr("y2", function(d) { return d.target.y; });
-
-					  gnodes.attr("transform", function(d) {
-						return 'translate(' + [d.x, d.y] + ')';
-					  });
-				  });
-				});
-			}
-			//Appel à la function
-			//console.log(location.pathname);
-			if (location.pathname=="/") {
-				loadGraph("data/categorie.json");
-			} else
-				loadGraph("data/sous_etapes.json");
-			
-			
-        </script>
-    	<section>
-			
-		</section>
+        <div class="ui visible left sidebar inverted vertical menu">
+            <h1 class="item">Projet crawling</h1>
+            <a class="item"><i class="home icon"></i>Home</a>
+            <a class="item"><i class="block layout icon"></i>Topics</a>
+            <a class="item"><i class="smile icon"></i>Friends</a>
+            <p class="item">Par Macky Dieng &amp; Baptiste Vannesson</p>
+        </div>
+        <script src="js/d3.min.js"></script>
+        <script src="js/loadGraph.js"></script>
     </body>
 </html>
 

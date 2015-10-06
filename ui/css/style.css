@@ -24,13 +24,16 @@ time, mark, audio, video {
   border: 0;
 }
 svg {
-	margin-top: -60px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+    display: block;
+    margin: auto;
+    background-color: rgb(242, 242, 242);
+    border: 10px solid black;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px black;
 }
 body {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .node {
@@ -44,29 +47,29 @@ body {
 }
 
 circle {
-	fill: #6ECBF1;
-	transition: fill .3s ease;
-	cursor: pointer;
+    fill: #6ECBF1;
+    transition: fill .3s ease;
+    cursor: pointer;
 }
 
 circle:hover {
-	fill: #4485F5;
+    fill: #4485F5;
 }
 
 text {
-	font-family: Ubuntu, sans-serif;
-	font-weight: bold;
-	font-variant: small-caps;
-	fill: #01008A;
-	cursor: pointer;
+    font-family: Ubuntu, sans-serif;
+    font-weight: bold;
+    font-variant: small-caps;
+    fill: #01008A;
+    cursor: pointer;
 }
 
 text:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 /************Fin css d3js*****************/
 .well-lg {
-	padding-top:0px;
+    padding-top:0px;
 }
 body {
     font-family : Open Sans, sans-serif;
@@ -74,12 +77,12 @@ body {
     //background-color: #080808;
 }
 section {
-	width:1024px;
-	height:600px;
+    width:1024px;
+    height:600px;
 }
 header {
-	text-align:center;
-	margin-top:0px;
+    text-align:center;
+    margin-top:0px;
 }
 footer
 {
@@ -179,7 +182,7 @@ section article p {
     line-height:1.5;
     margin-bottom:7px;
     //margin-left: 15px;
-    
+
 }
 pre[class*="language-"] {
     padding: 0em;
@@ -212,7 +215,7 @@ figure#slb-welcome {
     border:1px solid #ddd;
     margin-top:10px;
     margin-bottom:10px;
-    
+
 }
 figure#slb-welcome img{
     width:100%;
