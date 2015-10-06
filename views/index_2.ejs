@@ -6,21 +6,31 @@
         <meta name="author" content="Macky Dieng, Baptiste Vannesson">
         <link rel="stylesheet" href="css/style.css" media="all">
         <link rel="stylesheet" href="semantic/dist/semantic.min.css">
-        <link rel="stylesheet" href="semantic/dist/components/sidebar.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="semantic/dist/semantic.min.js"></script>
-        <script src="semantic/dist/components/sidebar.min.js"></script>
         <script>
-            $('.ui.labeled.icon.sidebar').sidebar('toggle');
+            $( document ).ready(function() {
+                $( "#hide_menu" ).click(function() {
+                    $( '.ui.sidebar' ).sidebar( 'toggle' );
+                    console.log("toto");
+                });
+            });
         </script>
    </head>
     <body>
         <div class="ui visible left sidebar inverted vertical menu">
-            <h1 class="item">Projet crawling</h1>
-            <a class="item"><i class="home icon"></i>Home</a>
-            <a class="item"><i class="block layout icon"></i>Topics</a>
-            <a class="item"><i class="smile icon"></i>Friends</a>
-            <p class="item">Par Macky Dieng &amp; Baptiste Vannesson</p>
+<!--
+            <h1 class="item">FLOSS</h1>
+-->
+            <a class="item"><i class="block sidebar icon"></i><span id="hide_menu">Cacher le menu</span></a>
+            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
+            <a class="item"><i class="block bar chart icon"></i>Histogramme</a>
+            <a class="item"><i class="block pie chart icon"></i>Camembert</a>
+            <a class="item"><i class="block student icon"></i>À propos</a>
+            <div class="ui left search icon input">
+              <i class="search icon"></i>
+              <input name="search" placeholder="Search issues..." type="text">
+            </div>
         </div>
         <img src="images/tablet.png" alt="Écran" />
         <script src="js/d3.min.js"></script>

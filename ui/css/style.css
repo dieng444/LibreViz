@@ -30,7 +30,7 @@ svg {
     margin: auto;
     position: relative;
     top: -655px;
-    left: 20px;
+    left: 23px;
     border-radius: 30px;
 }
 body {
@@ -44,6 +44,11 @@ img {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
+}
+
+span#hide_menu {
+    font-weight: bold;
+    font-size: large;
 }
 
 .node {

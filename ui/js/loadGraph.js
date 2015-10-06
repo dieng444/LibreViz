@@ -1,6 +1,6 @@
 function loadGraph(dataFile)
 {
-    var width = 780,// window.innerWidth,
+    var width = 782,// window.innerWidth,
         height = 620;// window.innerHeight;
 
     // var color = d3.scale.ordinal();
@@ -58,13 +58,13 @@ function loadGraph(dataFile)
         .on("click", function(d) { location.href = "/"+d.name})
         .text(function(d) { return d.name; });
 
-    var images = gnodes.append("image")
-    .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Wilber-gimp.png/96px-Wilber-gimp.png")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 80)
-    .attr("height", 80)
-    .on("click", function(d) {alert(d.name);});
+    //~ var images = gnodes.append("image")
+    //~ .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Wilber-gimp.png/96px-Wilber-gimp.png")
+    //~ .attr("x", 0)
+    //~ .attr("y", 0)
+    //~ .attr("width", 80)
+    //~ .attr("height", 80)
+    //~ .on("click", function(d) {alert(d.name);});
 
     force.on("tick", function() {
         link.attr("x1", function(d) { return d.source.x; })
