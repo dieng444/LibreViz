@@ -6,33 +6,63 @@
         <meta name="author" content="Macky Dieng, Baptiste Vannesson">
         <link rel="stylesheet" href="css/style.css" media="all">
         <link rel="stylesheet" href="semantic/dist/semantic.min.css">
+   </head>
+    <body>
+<!--
+        <div class="ui black huge launch right attached button" style="width: 70px;">
+          <i class="icon list layout"></i>
+          <span class="text" style="display: none;">Menu</span>
+        </div>
+-->
+        <div class="ui left visible sidebar inverted vertical menu pushable">
+            <h1 class="item">OpenViz</h1>
+<!--
+            <button type="button" class="item" id="hide_menu"><i class="sidebar icon"></i>Cacher le menu</button>
+-->
+            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
+            <a class="item"><i class="bar chart icon"></i>Histogramme</a>
+            <a class="item"><i class="pie chart icon"></i>Camembert</a>
+            <a class="item"><i class="student icon"></i>À propos</a>
+            <a class="item" href="https://github.com/dieng444/crawling-project"><i class="github icon"></i>Le projet sur GitHub</a>
+            <div class="ui search">
+              <div class="ui icon input">
+                <input class="prompt" type="text" placeholder="Search countries...">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+        </div>
+        <div class="pusher">
+            <img src="images/tablet.png" alt="Écran" />
+            <div id="screen"></div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="semantic/dist/semantic.min.js"></script>
         <script>
             $( document ).ready(function() {
-                $( "#hide_menu" ).click(function() {
-                    $( '.ui.sidebar' ).sidebar( 'toggle' );
-                    console.log("toto");
-                });
+
+                $('.ui.search')
+                  .search({
+                    source: [
+                        {title: "Bureautique"},
+                        {title: "Graphisme"},
+                        {title: "Internet"},
+                        {title: "Loisirs"},
+                        {title: "Multimédia"},
+                        {title: "Progiciels"},
+                        {title: "Publication"},
+                        {title: "Serveurs"},
+                        {title: " (SIG)"},
+                        {title: "Système d'information géographique"},
+                        {title: "Traduction de textes"},
+                        {title: "Mathématique (y compris enseignement)"},
+                        {title: "Utilitaires"}
+                    ]
+                  })
+                ;
+
             });
         </script>
-   </head>
-    <body>
-        <div class="ui visible left sidebar inverted vertical menu">
-<!--
-            <h1 class="item">FLOSS</h1>
--->
-            <a class="item"><i class="block sidebar icon"></i><span id="hide_menu">Cacher le menu</span></a>
-            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
-            <a class="item"><i class="block bar chart icon"></i>Histogramme</a>
-            <a class="item"><i class="block pie chart icon"></i>Camembert</a>
-            <a class="item"><i class="block student icon"></i>À propos</a>
-            <div class="ui left search icon input">
-              <i class="search icon"></i>
-              <input name="search" placeholder="Search issues..." type="text">
-            </div>
-        </div>
-        <img src="images/tablet.png" alt="Écran" />
         <script src="js/d3.min.js"></script>
         <script src="js/loadGraph.js"></script>
     </body>

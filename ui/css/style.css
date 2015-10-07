@@ -38,6 +38,14 @@ body {
     background-image: url('../images/desk.jpg')!important;
 }
 
+h1 {
+    text-align: center;
+}
+
+.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+    transform: none !important;
+}
+
 img {
     width: 900px;
     display: block;

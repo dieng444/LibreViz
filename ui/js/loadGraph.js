@@ -12,7 +12,7 @@ function loadGraph(dataFile)
         .size([width, height]);
 
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("div#screen").append("svg")
         .attr("width", width)
         .attr("height", height);
 
