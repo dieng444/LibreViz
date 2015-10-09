@@ -1,114 +1,134 @@
 <!DOCTYPE html>
-	<html>
-		<head>
+    <html>
+        <head>
         <meta charset="utf-8" />
         <title>Projet crawling</title>
-        <link rel="stylesheet" href="css/bootstrap.css" media="all"/>
+        <meta name="author" content="Macky Dieng, Baptiste Vannesson">
         <link rel="stylesheet" href="css/style.css" media="all">
+        <link rel="stylesheet" href="semantic/dist/semantic.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
    </head>
     <body>
-    	<header class="well well-lg">
-			<h1>Projet crawling</h1>
-			<p>Membre du groupe : Baptiste Vannesson &amp; Macky Dieng</p>
-    	</header>
-    	<script src="js/d3.min.js"></script>
 <!--
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <div class="ui black huge launch right attached button" style="width: 70px;">
+          <i class="icon list layout"></i>
+          <span class="text" style="display: none;">Menu</span>
+        </div>
 -->
+        <div class="ui left visible sidebar inverted vertical menu pushable">
+            <h1 class="item">LibreViz</h1>
+<!--
+            <button type="button" class="item" id="hide_menu"><i class="sidebar icon"></i>Cacher le menu</button>
+-->
+            <audio controls>
+                <source src="music/FreeSWSong.ogg" type="audio/ogg">
+                Votre navigateur ne supporte pas le lecteur audio.
+            </audio>
+            <div class="item ui search">
+              <div class="ui inverted transparent input">
+                <input class="prompt" type="text" name="term" id="term" placeholder="Recherche par logiciel">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
+            <a class="item"><i class="bar chart icon"></i>Histogramme</a>
+            <a class="item"><i class="pie chart icon"></i>Camembert</a>
+            <div class="item ui toggle checkbox checked">
+                <input type="checkbox">
+                <label>Toggle labels</label>
+            </div>
+            <div class="item">
+                <div class="container-colorpicker">
+                    <input type="color" id="colorpicker-forme" value="">
+                    <label for="colorpicker-forme">Couleur de forme</label>
+                </div>
+            </div>
+            <div class="item">
+                <div class="container-colorpicker">
+                    <input type="color" id="colorpicker-fond" value="">
+                    <label for="colorpicker-fond">Couleur de fond</label>
+                </div>
+            </div>
+            <a class="item"><i class="student icon"></i>À propos</a>
+            <a class="item" href="https://github.com/dieng444/crawling-project"><i class="github icon"></i>Le projet sur GitHub</a>
+        </div>
+        <div class="pusher">
+            <img src="images/tablet.png" alt="Écran" id="tablet" />
+            <div id="screen"></div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="semantic/dist/semantic.min.js"></script>
         <script>
+            $( document ).ready(function() {
 
-            function loadGraph(dataFile)
-            {
-				var width = 960,// window.innerWidth,
-					height = 600;// window.innerHeight;
-				
-				// var color = d3.scale.ordinal();
+                // Gestion du comportement de la tablette
+                $( ".pusher" ).draggable();
 
-				var force = d3.layout.force()
-					.charge(-2000)
-					.gravity(0.1)
-					.linkDistance(180)
-					.size([width, height]);
-					
-				
-				var svg = d3.select("body").append("svg")
-					.attr("width", width)
-					.attr("height", height);
+                $( ".pusher" ).effect( "shake", "slow" );
 
-				d3.json(dataFile, function(error, graph) {
-				  if (error) throw error;
-				
-				  force
-					  .nodes(graph.nodes)
-					  .links(graph.links)
-					  .start();
-				 
-				 //console.log(graph.links);return;
-				  var link = svg.selectAll(".link")
-					  .data(graph.links)
-					.enter().append("line")
-					  .attr("class", "link")
+                $( "svg" ).mouseover(function() {
+                    $( ".pusher" ).draggable({ disabled: true });
+                });
 
-				  var gnodes = svg.selectAll('g.gnode')
-					  .data(graph.nodes)
-					  .enter()
-					  .append('g')
-					  .classed('gnode', true);
-					  
-				  /*var foreignObject = gnodes.append("foreignObject")
-					  //.data(graph.nodes)
-					  .attr("width", 100)
-					  .attr("height", 100);*/
-					  
-				  //var a = foreignObject.append('');
-					  //.attr('href',"/"+function(d) { return d.name; })
-					   //.text(function(d) { return d.name; });
-					  
-				  var node = gnodes.append("circle")
-					  .attr("class", "node")
-					  .attr("r", 35)
-					  .on("click", function(d) { location.href = "/"+d.name;})
-					  // .style("fill", function(d) { return color(d.group); })
-					  .call(force.drag);
+                $( "svg" ).mouseout(function() {
+                    $( ".pusher" ).draggable( "enable" );
+                });
 
-				  var labels = gnodes.append("text")
-					  .attr("x", 0)
-					  .attr("y", -39)
-					  .on("click", function(d) { location.href = "/"+d.name})
-					  .text(function(d) { return d.name; });
-					  
-				var images = gnodes.append("image")
-				  .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Wilber-gimp.png/96px-Wilber-gimp.png")
-                  .attr("x", 0)
-                  .attr("y", 0)
-                  .attr("width", 80)
-                  .attr("height", 80)
-                  .on("click", function(d) {alert(d.name);});
+                // Activation des tooltips
+                $( document ).tooltip();
 
-				  force.on("tick", function() {
-					link.attr("x1", function(d) { return d.source.x; })
-						.attr("y1", function(d) { return d.source.y; })
-						.attr("x2", function(d) { return d.target.x; })
-						.attr("y2", function(d) { return d.target.y; });
+                // Gestion du module de recherche
+                $('.ui.search')
+                  .search({
 
-					  gnodes.attr("transform", function(d) {
-						return 'translate(' + [d.x, d.y] + ')';
-					  });
-				  });
-				});
-			}
-			//Appel à la function
-			//console.log(location.pathname);
-			if (location.pathname=="/") {
-				loadGraph("data/categorie.json");
-			} else
-				loadGraph("data/sous_etapes.json");
-			
-			
+                    source: [
+                        {title: "Bureautique"},
+                        {title: "Graphisme"},
+                        {title: "Internet"},
+                        {title: "Loisirs"},
+                        {title: "Multimédia"},
+                        {title: "Progiciels"},
+                        {title: "Publication"},
+                        {title: "Serveurs"},
+                        {title: " (SIG)"},
+                        {title: "Système d'information géographique"},
+                        {title: "Traduction de textes"},
+                        {title: "Mathématique (y compris enseignement)"},
+                        {title: "Utilitaires"}
+                    ]
+                  })
+                ;
+
+                // L'utilisateur n'est pas censé cliquer sur le nœud central du graphe
+                $( "g:first-of-type > circle" ).click(function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
+                // Gestion des labels
+                $( ".ui.checkbox" ).click(function() {
+                    $('.ui.checkbox').checkbox();
+                    $( "svg g text" ).fadeToggle();
+                });
+
+                // Gestion des couleurs
+                $( "#colorpicker-fond" ).on("input", function() {
+                    $( "svg" ).css( "background-color", $( this ).val() );
+                });
+
+                $( "#colorpicker-forme" ).on("input", function() {
+                    $( "circle" ).css( "fill", $( this ).val() );
+                });
+
+            });
+
         </script>
-    	<section>
-			
-		</section>
+        <script src="js/d3.min.js"></script>
+        <script type="text/javascript" src="d3-tip/index.js"></script>
+        <script src="js/loadGraph.js"></script>
     </body>
 </html>
 

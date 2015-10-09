@@ -1,23 +1,9 @@
 @CHARSET "UTF-8";
-html, body, div, span, applet, object, iframe, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var, u, i, center,
-dl, dt, dd, ul,ol,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-/************Début css d3js*****************/
+
+/* ============================================================== */
+/* ========================== Reset ============================ */
+/* ============================================================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -29,40 +15,106 @@ svg {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+/* ============================================================== */
+/* =========================== Global ========================== */
+/* ============================================================ */
+
 body {
-	overflow: hidden;
+    overflow: hidden;
+    background-image: url('../images/desk.jpg')!important;
+}
+
+img#tablet {
+    width: 900px;
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================================== */
+/* ========================== Sidebar ========================== */
+/* ============================================================ */
+
+h1 {
+    text-align: center;
+}
+
+.ui.toggle.checkbox .box::before, .ui.toggle.checkbox label::before {
+    background-color: rgba(255, 255, 255, 0.3)!important;
+}
+
+.ui.toggle.checkbox .box::before:hover, .ui.toggle.checkbox label::before:hover {
+    background-color: rgba(255, 255, 255, 0.2)!important;
+}
+
+.ui.checkbox label {
+    color: white!important;
+    cursor: pointer!important;
+    text-align: right;
+}
+
+.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+    transform: none !important;
+}
+
+.container-colorpicker label {
+    float: right;
+    height: 23px;
+    line-height: 23px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#colorpicker-forme, #colorpicker-fond {
+    cursor: pointer;
+}
+
+/* ============================================================== */
+/* =========================== Graphe ========================== */
+/* ============================================================ */
+
+svg {
+    display: block;
+    background-color: #F2F2F2;
+    margin: auto;
+    margin: auto;
+    position: relative;
+    top: -655px;
+    left: 23px;
+    border-radius: 30px;
+    box-shadow: 0 0 7px white;
 }
 
 .node {
-  stroke: #4485F5;
+  stroke: #1B1C1D; /* #4485F5; */
   stroke-width: 5px;
 }
 
 .link {
-  stroke: #4485F5;
+  stroke: #1B1C1D; /* #4485F5; */
   stroke-width: 5px;
 }
 
 circle {
-	fill: #6ECBF1;
-	transition: fill .3s ease;
-	cursor: pointer;
+    fill: silver; /* #6ECBF1; */
+    box-shadow: 0 0 5px black;
+    transition: fill .3s ease;
+    cursor: pointer;
 }
 
 circle:hover {
-	fill: #4485F5;
+    fill: #4485F5;
 }
 
-text {
-	font-family: Ubuntu, sans-serif;
-	font-weight: bold;
-	font-variant: small-caps;
-	fill: #01008A;
-	cursor: pointer;
+g:first-of-type > circle {
+    fill: gray;
 }
 
-text:hover {
-	text-decoration: underline;
+g:first-of-type > circle:hover {
+    fill: gray;
+    cursor: initial;
 }
 /************Fin css d3js*****************/
 #term {
@@ -225,4 +277,11 @@ figure#slb-welcome img{
     width:100%;
     display:block;
     height:auto;
+}
+text {
+    font-family: Ubuntu, sans-serif;
+    font-weight: bold;
+    font-variant: small-caps;
+    fill: black;
+    cursor: pointer;
 }

@@ -97,7 +97,7 @@ function loadDataMongo(type, param)
 			if (!isSubCategoryLoaded) {
 				findSubCategories (param, db, function(result) {
 					var res = result.length > 0 ? true : false;
-					parser(result,'ui/data/categorie.json',"subCategory");
+					parser(result,'ui/data/sous_etape.json',"subCategory");
 					db.close();
 					return res;
 				});
@@ -106,7 +106,7 @@ function loadDataMongo(type, param)
 				if(isSubCategoryLoaded) {
 					findSoftware(param, db, function(result) {
 						var res = result.length > 0 ? true : false;
-						parser(result,'ui/data/categorie.json',"software");
+						parser(result,'ui/data/sous_etape.json',"software");
 						db.close();
 						return res;
 					});
