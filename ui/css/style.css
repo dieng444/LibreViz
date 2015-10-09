@@ -1,5 +1,3 @@
-@CHARSET "UTF-8";
-
 /* ============================================================== */
 /* ========================== Reset ============================ */
 /* ============================================================ */
@@ -22,10 +20,17 @@ body {
 img#tablet {
     width: 900px;
     display: block;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
 }
+
+@media screen and (max-width: 1366px) {
+
+    img#tablet {
+        width: 650px;
+        height: 499px;
+    }
+
+}
+
 
 /* ============================================================== */
 /* ========================== Sidebar ========================== */
@@ -35,25 +40,34 @@ h1 {
     text-align: center;
 }
 
+.ui.sidebar {
+  width: 300px !important;
+}
+
 .ui.toggle.checkbox .box::before, .ui.toggle.checkbox label::before {
-    background-color: rgba(255, 255, 255, 0.3)!important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .ui.toggle.checkbox .box::before:hover, .ui.toggle.checkbox label::before:hover {
-    background-color: rgba(255, 255, 255, 0.2)!important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .ui.checkbox label {
-    color: white!important;
-    cursor: pointer!important;
-    text-align: right;
+    color: white !important;
+    cursor: pointer !important;
+    text-align: right!important;
+}
+
+.item.ui.toggle.checkbox.checked label:focus {
+    color: white !important;
 }
 
 .ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
     transform: none !important;
 }
 
-.container-colorpicker label {
+.container-colorpicker label,
+#container-shapepicker label {
     float: right;
     height: 23px;
     line-height: 23px;
@@ -61,7 +75,7 @@ h1 {
     cursor: pointer;
 }
 
-#colorpicker-forme, #colorpicker-fond {
+#colorpicker-forme, #colorpicker-fond, #shapepicker {
     cursor: pointer;
 }
 
@@ -69,46 +83,91 @@ h1 {
 /* =========================== Graphe ========================== */
 /* ============================================================ */
 
+#viz {
+    width: 900px;
+    height: 690px;
+    margin-left: 350px;
+    display: inline-block;
+    cursor: move;
+}
+
+#power {
+    position: relative;
+    top: 375px;
+    left: 15px;
+    cursor: crosshair;
+    width: 50px;
+    height: 50px;
+    background: url('../images/power.png') 0 0 no-repeat;
+}
+
 svg {
     display: block;
     background-color: #F2F2F2;
-    margin: auto;
-    margin: auto;
     position: relative;
+    width: 782px;
+    height: 620px;
     top: -655px;
     left: 23px;
+    margin-left: 58px;
+    cursor: initial;
     border-radius: 30px;
     box-shadow: 0 0 7px white;
 }
 
 .node {
-  stroke: #1B1C1D; /* #4485F5; */
-  stroke-width: 5px;
-}
-
-.link {
-  stroke: #1B1C1D; /* #4485F5; */
-  stroke-width: 5px;
-}
-
-circle {
+    stroke: #1B1C1D; /* #4485F5; */
+    stroke-width: 4px;
     fill: silver; /* #6ECBF1; */
     box-shadow: 0 0 5px black;
     transition: fill .3s ease;
     cursor: pointer;
 }
 
-circle:hover {
+.node:hover {
     fill: #4485F5;
 }
 
-g:first-of-type > circle {
+.link {
+    stroke: #1B1C1D; /* #4485F5; */
+    stroke-width: 4px;
+}
+
+@media screen and (max-width: 1366px) {
+
+    #power {
+        width: 42px;
+        height: 42px;
+        top: 270px;
+        left: 7px;
+        background: url('../images/power_mini.png') 0 0 no-repeat;
+    }
+
+    svg {
+        width: 570px;
+        height: 451px;
+        top: -475px;
+        left: 14px;
+        margin-left: 42px;
+    }
+
+    .node {
+        stroke-width: 3px;
+    }
+
+    .link {
+        stroke-width: 3px;
+    }
+
+}
+
+g:first-of-type > .node {
     fill: gray;
 }
 
-g:first-of-type > circle:hover {
+g:first-of-type > .node:hover {
     fill: gray;
-    cursor: initial;
+    cursor: move;
 }
 
 text {

@@ -1,15 +1,32 @@
 function loadGraph(dataFile)
 {
 
-    var width = 782,// window.innerWidth,
-        height = 620;// window.innerHeight;
+    var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, textX, textY;
 
-    // var color = d3.scale.ordinal();
+    // Le canevas et la taille des formes seront différents selon la définition d'écran
+    if ($( window ).width() >= 1366) {
+        width = 782;
+        height = 620;
+        radiusCircle = 40;
+        borderRect = 50;
+        linkDistance = 200;
+        textX = 0;
+        textY = -43;
+    } else {
+        width = 570;
+        height = 451;
+        radiusCircle = 30;
+        borderRect = 40;
+        linkDistance = 130;
+        textX = 0;
+        textY = -33;
+    }
 
+    // Initialisation d'un graphe de force
     var force = d3.layout.force()
         .charge(-2000)
         .gravity(0.1)
-        .linkDistance(180)
+        .linkDistance(linkDistance)
         .size([width, height]);
 
     var tip = d3.tip()
@@ -18,8 +35,8 @@ function loadGraph(dataFile)
 
     var svg = d3.select("#screen")
         .append("svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", vizWidth)
+        .attr("height", vizHeight)
         .call(tip);
 
     d3.json(dataFile, function(error, graph) {
@@ -30,10 +47,9 @@ function loadGraph(dataFile)
           .links(graph.links)
           .start();
 
-     //console.log(graph.links);return;
       var link = svg.selectAll(".link")
           .data(graph.links)
-        .enter().append("line")
+          .enter().append("line")
           .attr("class", "link")
 
       var gnodes = svg.selectAll('g.gnode')
@@ -51,11 +67,13 @@ function loadGraph(dataFile)
           //.attr('href',"/"+function(d) { return d.name; })
            //.text(function(d) { return d.name; });
 
+    if (shape == "circle") { // On crée des cercles...
+
       var node = gnodes.append("circle")
           .attr("class", "node")
-          .attr("r", 35)
-          .on('mouseover', tip.show)
-          .on('mouseout', tip.hide)
+          .attr("r", radiusCircle)
+          // .on('mouseover', tip.show)
+          // .on('mouseout', tip.hide)
           .on("click", function(d) {
                 //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
                 //var f_url = d.name.replace(/'/g,'');
@@ -77,9 +95,41 @@ function loadGraph(dataFile)
           // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);
 
+     } else { // ou on crée des carrés !
+
+        var node = gnodes.append("rect")
+          .attr("class", "node")
+          .attr("width", borderRect)
+          .attr("height", borderRect)
+          .attr("x", -25)
+          .attr("y", -25)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+          .on("click", function(d) {
+                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
+                //var f_url = d.name.replace(/'/g,'');
+                //var s_url = d.name.replace(/" "/g,"_");
+                //location.href = "/"+d.name.trim();
+                //return;
+                //À voir pour SIG et les autres pour l'espace qui se trouve devant
+                var cleaned_url = d.name.trim();
+                var tab_s = cleaned_url.split(" "),
+                    url = " ";
+                if (tab_s.length > 1) {
+                    for (var i=0; i < tab_s.length; i++) {
+                        url += tab_s[i]+"_";
+                    }
+                    location.href = "/"+ url.substr(0, url.length - 1).trim();
+                } else
+                    location.href = "/"+cleaned_url;
+          ;})
+          .call(force.drag);
+
+    }
+
       var labels = gnodes.append("text")
-          .attr("x", 0)
-          .attr("y", -39)
+          .attr("x", textX)
+          .attr("y", textY)
           .text(function(d) { return d.name; });
 
     //~ var images = gnodes.append("image")
@@ -89,6 +139,9 @@ function loadGraph(dataFile)
       //~ .attr("width", 80)
       //~ .attr("height", 80)
       //~ .on("click", function(d) {alert(d.name);});
+
+    // On enlève l'écouteur d'événement (clic) sur le premier nœud (central)
+    d3.select('.node').on('click', null);
 
       force.on("tick", function() {
         link.attr("x1", function(d) { return d.source.x; })
