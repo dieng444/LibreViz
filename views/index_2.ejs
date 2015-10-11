@@ -2,132 +2,111 @@
     <html>
         <head>
         <meta charset="utf-8" />
-        <title>Projet crawling</title>
+        <title>LibreViz</title>
         <meta name="author" content="Macky Dieng, Baptiste Vannesson">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
         <link rel="stylesheet" href="css/style.css" media="all">
         <link rel="stylesheet" href="semantic/dist/semantic.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
    </head>
     <body>
-<!--
-        <div class="ui black huge launch right attached button" style="width: 70px;">
-          <i class="icon list layout"></i>
-          <span class="text" style="display: none;">Menu</span>
-        </div>
--->
-        <div class="ui left visible sidebar inverted vertical menu pushable">
+        <!-- Menu (sidebar) -->
+        <div class="ui left vertical visible inverted sidebar menu">
             <h1 class="item">LibreViz</h1>
-<!--
-            <button type="button" class="item" id="hide_menu"><i class="sidebar icon"></i>Cacher le menu</button>
--->
+            <!-- Lecteur de musique -->
             <audio controls>
                 <source src="music/FreeSWSong.ogg" type="audio/ogg">
                 Votre navigateur ne supporte pas le lecteur audio.
             </audio>
+            <!-- Barre de recherche -->
             <div class="item ui search">
-              <div class="ui inverted transparent input">
-                <input class="prompt" type="text" name="term" id="term" placeholder="Recherche par logiciel">
-                <i class="search icon"></i>
-              </div>
-              <div class="results"></div>
+                <div class="ui inverted transparent input">
+                    <input class="prompt" type="text" name="term" id="term" placeholder="Chercher un logiciel">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
             </div>
-            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
+            <!-- Liens divers -->
+            <a class="item" href="/" id="home"><i class="home icon"></i>Accueil</a>
+            <a class="item" href="/stats"><i class="line chart icon"></i>Statistiques</a>
+<!--
             <a class="item"><i class="bar chart icon"></i>Histogramme</a>
             <a class="item"><i class="pie chart icon"></i>Camembert</a>
-            <div class="item ui toggle checkbox checked">
-                <input type="checkbox">
-                <label>Toggle labels</label>
-            </div>
-            <div class="item">
+-->
+            <!-- Gestion des labels -->
+            <a class="item ui toggle checkbox">
+                <input type="checkbox" id="toggleLabels">
+                <label for="toggleLabels">Libellés (ON / OFF)</label>
+            </a>
+            <!-- Sélecteurs de couleurs -->
+            <a class="item">
+                <div class="container-colorpicker">
+                    <input type="color" id="colorpicker-label" value="">
+                    <label for="colorpicker-label">Couleur des libellés</label>
+                </div>
+            </a>
+            <a class="item">
                 <div class="container-colorpicker">
                     <input type="color" id="colorpicker-forme" value="">
-                    <label for="colorpicker-forme">Couleur de forme</label>
+                    <label for="colorpicker-forme">Couleur des formes</label>
                 </div>
-            </div>
-            <div class="item">
+            </a>
+            <a class="item">
                 <div class="container-colorpicker">
                     <input type="color" id="colorpicker-fond" value="">
                     <label for="colorpicker-fond">Couleur de fond</label>
                 </div>
-            </div>
-            <a class="item"><i class="student icon"></i>À propos</a>
-            <a class="item" href="https://github.com/dieng444/crawling-project"><i class="github icon"></i>Le projet sur GitHub</a>
+            </a>
+            <!-- Sélecteur de forme -->
+            <a class="item">
+                <div id="container-shapepicker">
+                    <button id="circle-picker" class="ui icon mini button">
+                        <i class="circle icon"></i>
+                    </button>
+                    <button id="square-picker" class="ui icon mini button">
+                        <i class="square icon"></i>
+                    </button>
+                    <button id="star-picker" class="ui icon mini button">
+                        <i class="asterisk icon"></i>
+                    </button>
+                    <label for="circle-picker">Changer la forme</label>
+                </div>
+            </a>
+            <!-- Liens divers -->
+            <a class="item" href="/a-propos">
+                <i class="student icon"></i>
+                À propos de l'application
+            </a>
+            <a class="item" href="https://github.com/dieng444/crawling-project" target="_blank">
+                <i class="github icon"></i>
+                Le projet est sur GitHub !
+            </a>
+            <a class="item" href="https://fr.wikipedia.org/wiki/Correspondance_entre_logiciels_libres_et_logiciels_propri%C3%A9taires" target="_blank">
+                <i class="world icon"></i>
+                Nos données (Wikipédia)
+            </a>
+            <a class="item" href="http://alternativeto.net/" target="_blank">
+                <i class="world icon"></i>
+                Nos données (AlternativeTo)
+            </a>
         </div>
+        <!-- Zone de visualisation -->
         <div class="pusher">
-            <img src="images/tablet.png" alt="Écran" id="tablet" />
-            <div id="screen"></div>
+            <div id="viz">
+                <div id="power" title=""></div>
+                <img src="images/tablet.png" alt="Écran" id="tablet" />
+                <div id="screen"></div>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="semantic/dist/semantic.min.js"></script>
-        <script>
-            $( document ).ready(function() {
-
-                // Gestion du comportement de la tablette
-                $( ".pusher" ).draggable();
-
-                $( ".pusher" ).effect( "shake", "slow" );
-
-                $( "svg" ).mouseover(function() {
-                    $( ".pusher" ).draggable({ disabled: true });
-                });
-
-                $( "svg" ).mouseout(function() {
-                    $( ".pusher" ).draggable( "enable" );
-                });
-
-                // Activation des tooltips
-                $( document ).tooltip();
-
-                // Gestion du module de recherche
-                $('.ui.search')
-                  .search({
-
-                    source: [
-                        {title: "Bureautique"},
-                        {title: "Graphisme"},
-                        {title: "Internet"},
-                        {title: "Loisirs"},
-                        {title: "Multimédia"},
-                        {title: "Progiciels"},
-                        {title: "Publication"},
-                        {title: "Serveurs"},
-                        {title: " (SIG)"},
-                        {title: "Système d'information géographique"},
-                        {title: "Traduction de textes"},
-                        {title: "Mathématique (y compris enseignement)"},
-                        {title: "Utilitaires"}
-                    ]
-                  })
-                ;
-
-                // L'utilisateur n'est pas censé cliquer sur le nœud central du graphe
-                $( "g:first-of-type > circle" ).click(function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-
-                // Gestion des labels
-                $( ".ui.checkbox" ).click(function() {
-                    $('.ui.checkbox').checkbox();
-                    $( "svg g text" ).fadeToggle();
-                });
-
-                // Gestion des couleurs
-                $( "#colorpicker-fond" ).on("input", function() {
-                    $( "svg" ).css( "background-color", $( this ).val() );
-                });
-
-                $( "#colorpicker-forme" ).on("input", function() {
-                    $( "circle" ).css( "fill", $( this ).val() );
-                });
-
-            });
-
-        </script>
+        <script src="/js-cookie/src/js.cookie.js"></script>
+        <script src="js/loadDocument.js"></script>
         <script src="js/d3.min.js"></script>
-        <script type="text/javascript" src="d3-tip/index.js"></script>
+        <script src="d3-tip/index.js"></script>
+        <script src="js/d3pie.min.js"></script>
         <script src="js/loadGraph.js"></script>
     </body>
 </html>

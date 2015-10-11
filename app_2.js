@@ -5,6 +5,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var MongoClient = require('mongodb').MongoClient;
 var fs = require('fs');
 var jsonfile = require('jsonfile');
+var ejs = require('ejs');
 
 var app = express();
 
@@ -120,6 +121,7 @@ function loadDataMongo(type, param)
  * Spécification du chemin des fichiers static
  * */
 app.use(express.static(__dirname + '/ui/'))
+app.use(express.static(__dirname + '/node_modules/'))
 app.use(express.static(__dirname + '/bower_components/'))
 /**
  * Route d'affichage des catégories
@@ -139,9 +141,14 @@ app.use(express.static(__dirname + '/bower_components/'))
     //var text_404 = '<h2 style="text-align:center;margin-top:40px;margin:auro;" class="well well-lg">Oups ! il semble que la donnée que vous cherchez n\'existe pas.</h2>';
     //console.log(loadDataMongo("subStep", param)+"tptp");
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
-    loadDataMongo("subStep", param);
-    res.render('index_2.ejs', {});
-
+    if (p == "a-propos") {
+        res.render('a-propos.ejs', {});
+    } else if (p == "stats") {
+        res.render('stats.ejs', {});
+    } else {
+        loadDataMongo("subStep", param);
+        res.render('index_2.ejs', {});
+    }
 })
 /*Recherche d'une sous-catégorie donnée*/
 .post('/find', urlencodedParser, function(req, res) {
