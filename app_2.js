@@ -5,6 +5,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var MongoClient = require('mongodb').MongoClient;
 var fs = require('fs');
 var jsonfile = require('jsonfile');
+var ejs = require('ejs');
 
 var app = express();
 
@@ -142,6 +143,8 @@ app.use(express.static(__dirname + '/bower_components/'))
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
     if (p == "a-propos") {
         res.render('a-propos.ejs', {});
+    } else if (p == "stats") {
+        res.render('stats.ejs', {});
     } else {
         loadDataMongo("subStep", param);
         res.render('index_2.ejs', {});

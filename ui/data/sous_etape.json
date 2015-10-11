@@ -2,25 +2,34 @@
   "nodes": [
     {},
     {
-      "name": "Dessin assisté par ordinateur"
+      "name": "Navigateur Web"
     },
     {
-      "name": "Conception assistée par ordinateur"
+      "name": "Client de messagerie"
     },
     {
-      "name": "Dessin vectoriel"
+      "name": "Client de "
     },
     {
-      "name": "Modélisation 3D"
+      "name": "Visioconférence"
     },
     {
-      "name": "Gestionnaire d'images"
+      "name": "Client "
     },
     {
-      "name": "Retouche d'image"
+      "name": "Client IRC"
     },
     {
-      "name": "Visionneuse d'images"
+      "name": "Client "
+    },
+    {
+      "name": "Voix sur réseau IP"
+    },
+    {
+      "name": "Gestionnaire de téléchargement"
+    },
+    {
+      "name": "Lecteur multimédia"
     }
   ],
   "links": [
@@ -51,6 +60,18 @@
     {
       "source": 0,
       "target": 7
+    },
+    {
+      "source": 0,
+      "target": 8
+    },
+    {
+      "source": 0,
+      "target": 9
+    },
+    {
+      "source": 0,
+      "target": 10
     }
   ]
 }

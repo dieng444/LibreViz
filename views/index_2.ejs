@@ -21,16 +21,19 @@
             </audio>
             <!-- Barre de recherche -->
             <div class="item ui search">
-              <div class="ui inverted transparent input">
-                <input class="prompt" type="text" name="term" id="term" placeholder="Recherche par logiciel">
-                <i class="search icon"></i>
-              </div>
-              <div class="results"></div>
+                <div class="ui inverted transparent input">
+                    <input class="prompt" type="text" name="term" id="term" placeholder="Chercher un logiciel">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
             </div>
             <!-- Liens divers -->
-            <a class="item" href="http://localhost:8080"><i class="home icon"></i>Accueil</a>
+            <a class="item" href="/" id="home"><i class="home icon"></i>Accueil</a>
+            <a class="item" href="/stats"><i class="line chart icon"></i>Statistiques</a>
+<!--
             <a class="item"><i class="bar chart icon"></i>Histogramme</a>
             <a class="item"><i class="pie chart icon"></i>Camembert</a>
+-->
             <!-- Gestion des labels -->
             <a class="item ui toggle checkbox">
                 <input type="checkbox" id="toggleLabels">
@@ -71,14 +74,27 @@
                 </div>
             </a>
             <!-- Liens divers -->
-            <a class="item" href="/a-propos"><i class="student icon"></i>À propos de l'application</a>
-            <a class="item" href="https://github.com/dieng444/crawling-project"><i class="github icon"></i>Le projet est sur GitHub !</a>
-            <a class="item" href="https://fr.wikipedia.org/wiki/Correspondance_entre_logiciels_libres_et_logiciels_propri%C3%A9taires"><i class="world icon"></i>Provenance des données</a>
+            <a class="item" href="/a-propos">
+                <i class="student icon"></i>
+                À propos de l'application
+            </a>
+            <a class="item" href="https://github.com/dieng444/crawling-project" target="_blank">
+                <i class="github icon"></i>
+                Le projet est sur GitHub !
+            </a>
+            <a class="item" href="https://fr.wikipedia.org/wiki/Correspondance_entre_logiciels_libres_et_logiciels_propri%C3%A9taires" target="_blank">
+                <i class="world icon"></i>
+                Nos données (Wikipédia)
+            </a>
+            <a class="item" href="http://alternativeto.net/" target="_blank">
+                <i class="world icon"></i>
+                Nos données (AlternativeTo)
+            </a>
         </div>
         <!-- Zone de visualisation -->
         <div class="pusher">
             <div id="viz">
-                <div id="power" title="Cacher le menu"></div>
+                <div id="power" title=""></div>
                 <img src="images/tablet.png" alt="Écran" id="tablet" />
                 <div id="screen"></div>
             </div>
@@ -90,6 +106,7 @@
         <script src="js/loadDocument.js"></script>
         <script src="js/d3.min.js"></script>
         <script src="d3-tip/index.js"></script>
+        <script src="js/d3pie.min.js"></script>
         <script src="js/loadGraph.js"></script>
     </body>
 </html>

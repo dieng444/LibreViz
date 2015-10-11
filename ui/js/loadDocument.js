@@ -1,20 +1,26 @@
 $( document ).ready(function() {
 
+    // Activation de la tooltip du bouton qui gère la sidebar
+    var flag = true;
+    $( "#power" ).tooltip( {content: "Cacher le menu"} );
+
     // Gestion du comportement de la sidebar
     $( "#power" ).click(function() {
         // Si la sidebar n'est pas visible, le bouton est gris...
-        if ($( ".ui.sidebar" ).attr( "style" ) != "display: none;") {
-            $( "#power" ).attr( "title", "Afficher le menu" );
+        if (flag == true) {
+            flag = false;
+            $( this ).tooltip( {content: "Afficher le menu"} );
             if ($( window ).width() >= 1366) {
                 $( "#power" ).css( "background-position", "-51px 0" );
             } else {
                 $( "#power" ).css( "background-position", "-43px 0" );
             }
         } else { // ... sinon il est rouge
-            $( "#power" ).attr( "title", "Cacher le menu" );
+            flag = true;
+            $( "#power" ).tooltip( {content: "Cacher le menu"} );
             $( "#power" ).css( "background-position", "0 0" );
         }
-        $( ".ui.sidebar" ).toggle( "slide", "slow");
+        $( ".ui.sidebar" ).toggle( "slide", "slow" );
     });
 
     // Gestion du comportement de la tablette
@@ -28,48 +34,47 @@ $( document ).ready(function() {
         $( "#viz" ).draggable( "enable" );
     });
 
-    // Activation des tooltips
-    $( document ).tooltip();
-
     // Gestion du module de recherche
     $('.ui.search')
-      .search({
-
-        source: [
-            {title: "Bureautique"},
-            {title: "Graphisme"},
-            {title: "Internet"},
-            {title: "Loisirs"},
-            {title: "Multimédia"},
-            {title: "Progiciels"},
-            {title: "Publication"},
-            {title: "Serveurs"},
-            {title: " (SIG)"},
-            {title: "Système d'information géographique"},
-            {title: "Traduction de textes"},
-            {title: "Mathématique (y compris enseignement)"},
-            {title: "Utilitaires"}
-        ]
-      })
+        .search({
+            maxResults: 10,
+            source: [
+                {title: "Bureautique"},
+                {title: "Graphisme"},
+                {title: "Internet"},
+                {title: "Loisirs"},
+                {title: "Multimédia"},
+                {title: "Progiciels"},
+                {title: "Publication"},
+                {title: "Serveurs"},
+                {title: " (SIG)"},
+                {title: "Système d'information géographique"},
+                {title: "Traduction de textes"},
+                {title: "Mathématique (y compris enseignement)"},
+                {title: "Utilitaires"}
+            ],
+            onSelect: function(result, response) {
+                location.href = result.title;
+            }
+        })
     ;
 
     // Gestion des labels
-    //~ if (Cookies.get( "labelState" ) == "off") {
-        //~ $( "svg g text" ).hide();
-        //~ $( "#toggleLabels" ).prop( "checked", true);
-    //~ } else {
-        //~ $( "svg g text" ).show();
-        //~ $( "#toggleLabels" ).prop( "checked", false);
-    //~ }
+    if (Cookies.get( "labelState" ) == "off") {
+        $( "#toggleLabels" ).prop( "checked", true);
+    } else {
+        $( "#toggleLabels" ).prop( "checked", false);
+    }
 
     $('.ui.checkbox').checkbox({
         onChecked: function() {
             $( "svg g text" ).fadeOut();
-            //~ Cookies.set( "labelState", "off", { expires: 1 });
+            Cookies.set( "labelState", "off", { expires: 1 });
         },
         onUnchecked: function() {
             $( "svg g text" ).fadeIn();
-            //~ Cookies.set( "labelState", "on", { expires: 1 });
+            Cookies.set( "labelState", "on", { expires: 1 });
+            location.reload();
         }
     });
 

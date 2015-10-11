@@ -8,6 +8,10 @@
     border: 0;
 }
 
+:focus {
+    outline: none;
+}
+
 /* ============================================================== */
 /* =========================== Global ========================== */
 /* ============================================================ */
@@ -44,6 +48,25 @@ h1 {
   width: 300px !important;
 }
 
+.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+    transform: none !important;
+}
+
+.ui.search {
+    position: absolute !important;
+    z-index: 999 !important;
+    width: 100% !important;
+}
+
+.ui.search > .results {
+    width: 100% !important;
+    border-radius: 0 !important;
+}
+
+#home {
+    margin-top: 42px;
+}
+
 .ui.toggle.checkbox .box::before, .ui.toggle.checkbox label::before {
     background-color: rgba(255, 255, 255, 0.3) !important;
 }
@@ -56,14 +79,6 @@ h1 {
     color: white !important;
     cursor: pointer !important;
     text-align: right!important;
-}
-
-.item.ui.toggle.checkbox.checked label:focus {
-    color: white !important;
-}
-
-.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
-    transform: none !important;
 }
 
 .container-colorpicker label,
