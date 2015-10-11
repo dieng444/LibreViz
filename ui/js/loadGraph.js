@@ -1,23 +1,53 @@
+var shape;
+var backgroundColor;
+var shapeColor;
+var labelColor;
+
+// L'utilisateur a-t-il customisé l'affichage ?
+function testCustomDisplay(cookieName, defaultValue) {
+    var property;
+    if (Cookies.get( cookieName ) === "undefined") {
+        property = defaultValue;
+    } else {
+        property = Cookies.get( cookieName );
+    }
+    return property;
+}
+
+shape = testCustomDisplay("shape", "circle");
+backgroundColor = testCustomDisplay("backgroundColor", "#F2F2F2");
+shapeColor = testCustomDisplay("shapeColor", "silver");
+labelColor = testCustomDisplay("labelColor", "black");
+
+// On n'envoie pas les mêmes données sur toutes les pages...
+if (location.pathname=="/") {
+    loadGraph("data/categorie.json", "silver");
+} else
+    loadGraph("data/sous_etape.json", shapeColor);
+
+// Chargement du graphe
 function loadGraph(dataFile)
 {
 
-    var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, textX, textY;
+    var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, sizeStar, textX, textY;
 
     // Le canevas et la taille des formes seront différents selon la définition d'écran
     if ($( window ).width() >= 1366) {
         width = 782;
         height = 620;
+        linkDistance = 200;
         radiusCircle = 40;
         borderRect = 50;
-        linkDistance = 200;
+        //~ sizeStar = 50;
         textX = 0;
         textY = -43;
     } else {
         width = 570;
         height = 451;
+        linkDistance = 130;
         radiusCircle = 30;
         borderRect = 40;
-        linkDistance = 130;
+        //~ sizeStar = 40;
         textX = 0;
         textY = -33;
     }
@@ -37,6 +67,7 @@ function loadGraph(dataFile)
         .append("svg")
         .attr("width", vizWidth)
         .attr("height", vizHeight)
+        .style("background-color", backgroundColor)
         .call(tip);
 
     d3.json(dataFile, function(error, graph) {
@@ -67,35 +98,7 @@ function loadGraph(dataFile)
           //.attr('href',"/"+function(d) { return d.name; })
            //.text(function(d) { return d.name; });
 
-    if (shape == "circle") { // On crée des cercles...
-
-      var node = gnodes.append("circle")
-          .attr("class", "node")
-          .attr("r", radiusCircle)
-          // .on('mouseover', tip.show)
-          // .on('mouseout', tip.hide)
-          .on("click", function(d) {
-                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
-                //var f_url = d.name.replace(/'/g,'');
-                //var s_url = d.name.replace(/" "/g,"_");
-                //location.href = "/"+d.name.trim();
-                //return;
-                //À voir pour SIG et les autres pour l'espace qui se trouve devant
-                var cleaned_url = d.name.trim();
-                var tab_s = cleaned_url.split(" "),
-                    url = " ";
-                if (tab_s.length > 1) {
-                    for (var i=0; i < tab_s.length; i++) {
-                        url += tab_s[i]+"_";
-                    }
-                    location.href = "/"+ url.substr(0, url.length - 1).trim();
-                } else
-                    location.href = "/"+cleaned_url;
-          ;})
-          // .style("fill", function(d) { return color(d.group); })
-          .call(force.drag);
-
-     } else { // ou on crée des carrés !
+    if (shape == "square") { // On crée des carrés...
 
         var node = gnodes.append("rect")
           .attr("class", "node")
@@ -103,6 +106,7 @@ function loadGraph(dataFile)
           .attr("height", borderRect)
           .attr("x", -25)
           .attr("y", -25)
+          .style("fill", shapeColor)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
           .on("click", function(d) {
@@ -125,11 +129,73 @@ function loadGraph(dataFile)
           ;})
           .call(force.drag);
 
-    }
+    } else if (shape == "star") { // ... ou on crée des étoiles...
+
+        var node = gnodes.append("polygon")
+          .attr("class", "node")
+          .attr("points", "50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180")
+          .attr("transform", "translate(-50, -190)")
+          //~ .attr("width", sizeStar)
+          //~ .attr("height", sizeStar)
+          .style("fill", shapeColor)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+          .on("click", function(d) {
+                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
+                //var f_url = d.name.replace(/'/g,'');
+                //var s_url = d.name.replace(/" "/g,"_");
+                //location.href = "/"+d.name.trim();
+                //return;
+                //À voir pour SIG et les autres pour l'espace qui se trouve devant
+                var cleaned_url = d.name.trim();
+                var tab_s = cleaned_url.split(" "),
+                    url = " ";
+                if (tab_s.length > 1) {
+                    for (var i=0; i < tab_s.length; i++) {
+                        url += tab_s[i]+"_";
+                    }
+                    location.href = "/"+ url.substr(0, url.length - 1).trim();
+                } else
+                    location.href = "/"+cleaned_url;
+          ;})
+          // .style("fill", function(d) { return color(d.group); })
+          .call(force.drag);
+
+    } else {  // ... sinon on crée des cercles
+
+        var node = gnodes.append("circle")
+          .attr("class", "node")
+          .attr("r", radiusCircle)
+          .style("fill", shapeColor)
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+          .on("click", function(d) {
+                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
+                //var f_url = d.name.replace(/'/g,'');
+                //var s_url = d.name.replace(/" "/g,"_");
+                //location.href = "/"+d.name.trim();
+                //return;
+                //À voir pour SIG et les autres pour l'espace qui se trouve devant
+                var cleaned_url = d.name.trim();
+                var tab_s = cleaned_url.split(" "),
+                    url = " ";
+                if (tab_s.length > 1) {
+                    for (var i=0; i < tab_s.length; i++) {
+                        url += tab_s[i]+"_";
+                    }
+                    location.href = "/"+ url.substr(0, url.length - 1).trim();
+                } else
+                    location.href = "/"+cleaned_url;
+          ;})
+          // .style("fill", function(d) { return color(d.group); })
+          .call(force.drag);
+
+     }
 
       var labels = gnodes.append("text")
           .attr("x", textX)
           .attr("y", textY)
+          .style("fill", labelColor)
           .text(function(d) { return d.name; });
 
     //~ var images = gnodes.append("image")
@@ -155,9 +221,3 @@ function loadGraph(dataFile)
       });
     });
 }
-//Appel à la function
-//console.log(location.pathname);
-if (location.pathname=="/") {
-    loadGraph("data/categorie.json");
-} else
-    loadGraph("data/sous_etape.json");

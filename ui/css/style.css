@@ -86,14 +86,14 @@ h1 {
 #viz {
     width: 900px;
     height: 690px;
-    margin-left: 350px;
-    display: inline-block;
+    margin: 30px 0 0 350px;
+    display: flex;
     cursor: move;
 }
 
 #power {
-    position: relative;
-    top: 375px;
+    position: absolute;
+    top: 320px;
     left: 15px;
     cursor: crosshair;
     width: 50px;
@@ -101,24 +101,28 @@ h1 {
     background: url('../images/power.png') 0 0 no-repeat;
 }
 
-svg {
-    display: block;
-    background-color: #F2F2F2;
+#screen {
+    width: 782px;
+    height: 690px;
     position: relative;
+    left: -870px;
+    margin-left: 51px;
+}
+
+svg {
+    background-color: #F2F2F2;
     width: 782px;
     height: 620px;
-    top: -655px;
-    left: 23px;
-    margin-left: 58px;
+    margin-top: 35px;
     cursor: initial;
-    border-radius: 30px;
+    border-radius: 35px;
     box-shadow: 0 0 7px white;
 }
 
 .node {
-    stroke: #1B1C1D; /* #4485F5; */
+    stroke: #1B1C1D;
     stroke-width: 4px;
-    fill: silver; /* #6ECBF1; */
+    fill: silver;
     box-shadow: 0 0 5px black;
     transition: fill .3s ease;
     cursor: pointer;
@@ -129,26 +133,37 @@ svg {
 }
 
 .link {
-    stroke: #1B1C1D; /* #4485F5; */
+    stroke: #1B1C1D;
     stroke-width: 4px;
 }
 
 @media screen and (max-width: 1366px) {
 
+    #viz {
+        width: 650px;
+        height: 499px;
+    }
+
     #power {
         width: 42px;
         height: 42px;
-        top: 270px;
-        left: 7px;
+        top: 228px;
+        left: 6px;
         background: url('../images/power_mini.png') 0 0 no-repeat;
+    }
+
+    #screen {
+        width: 570px;
+        height: 451px;
+        top: -10px;
+        left: -596px;
+        margin-left: 0;
     }
 
     svg {
         width: 570px;
         height: 451px;
-        top: -475px;
-        left: 14px;
-        margin-left: 42px;
+        border-radius: 25px;
     }
 
     .node {
@@ -174,6 +189,5 @@ text {
     font-family: Ubuntu, sans-serif;
     font-weight: bold;
     font-variant: small-caps;
-    fill: black;
     cursor: pointer;
 }

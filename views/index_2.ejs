@@ -39,8 +39,14 @@
             <!-- Sélecteurs de couleurs -->
             <a class="item">
                 <div class="container-colorpicker">
+                    <input type="color" id="colorpicker-label" value="">
+                    <label for="colorpicker-label">Couleur des libellés</label>
+                </div>
+            </a>
+            <a class="item">
+                <div class="container-colorpicker">
                     <input type="color" id="colorpicker-forme" value="">
-                    <label for="colorpicker-forme">Couleur de forme</label>
+                    <label for="colorpicker-forme">Couleur des formes</label>
                 </div>
             </a>
             <a class="item">
@@ -58,11 +64,14 @@
                     <button id="square-picker" class="ui icon mini button">
                         <i class="square icon"></i>
                     </button>
+                    <button id="star-picker" class="ui icon mini button">
+                        <i class="asterisk icon"></i>
+                    </button>
                     <label for="circle-picker">Changer la forme</label>
                 </div>
             </a>
             <!-- Liens divers -->
-            <a class="item" id="test"><i class="student icon"></i>À propos de l'application</a>
+            <a class="item" href="/a-propos"><i class="student icon"></i>À propos de l'application</a>
             <a class="item" href="https://github.com/dieng444/crawling-project"><i class="github icon"></i>Le projet est sur GitHub !</a>
             <a class="item" href="https://fr.wikipedia.org/wiki/Correspondance_entre_logiciels_libres_et_logiciels_propri%C3%A9taires"><i class="world icon"></i>Provenance des données</a>
         </div>
@@ -77,6 +86,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="semantic/dist/semantic.min.js"></script>
+        <script src="/js-cookie/src/js.cookie.js"></script>
         <script src="js/loadDocument.js"></script>
         <script src="js/d3.min.js"></script>
         <script src="d3-tip/index.js"></script>

@@ -1,5 +1,3 @@
-var shape = "circle";
-
 $( document ).ready(function() {
 
     // Gestion du comportement de la sidebar
@@ -56,49 +54,70 @@ $( document ).ready(function() {
     ;
 
     // Gestion des labels
+    //~ if (Cookies.get( "labelState" ) == "off") {
+        //~ $( "svg g text" ).hide();
+        //~ $( "#toggleLabels" ).prop( "checked", true);
+    //~ } else {
+        //~ $( "svg g text" ).show();
+        //~ $( "#toggleLabels" ).prop( "checked", false);
+    //~ }
+
     $('.ui.checkbox').checkbox({
         onChecked: function() {
             $( "svg g text" ).fadeOut();
+            //~ Cookies.set( "labelState", "off", { expires: 1 });
         },
         onUnchecked: function() {
             $( "svg g text" ).fadeIn();
+            //~ Cookies.set( "labelState", "on", { expires: 1 });
         }
     });
 
     // Gestion des couleurs
+    $( "#colorpicker-label" ).on("input", function() {
+        var labelColor = $( this ).val();
+        $( "svg g text" ).css( "fill", $( this ).val() );
+        Cookies.set( "labelColor", labelColor, { expires: 1 });
+    });
+
     $( "#colorpicker-fond" ).on("input", function() {
+        var backgroundColor = $( this ).val();
         $( "svg" ).css( "background-color", $( this ).val() );
+        Cookies.set( "backgroundColor", backgroundColor, { expires: 1 });
     });
 
     $( "#colorpicker-forme" ).on("input", function() {
+        var shapeColor = $( this ).val();
         $( ".node" ).css( "fill", $( this ).val() );
+        Cookies.set( "shapeColor", shapeColor, { expires: 1 });
     });
+
+    function colorpickerUpdate(pickerType, cookieName, defaultColor) {
+        if (Cookies.get( cookieName ) === "undefined") {
+            $( "#colorpicker-" + pickerType ).val( defaultColor );
+        } else {
+            $( "#colorpicker-" + pickerType ).val( Cookies.get( cookieName ) );
+        }
+    }
+
+    colorpickerUpdate("label", "labelColor", "#000");
+    colorpickerUpdate("fond", "backgroundColor", "F2F2F2");
+    colorpickerUpdate("forme", "shapeColor", "#C0C0C0");
 
     // Gestion des formes
     $( "#square-picker" ).click(function() {
-        $( "svg" ).remove();
-        shape = "rectangle";
-        loadGraph("data/categorie.json");
-        $( "svg" ).mouseover(function() {
-            $( ".pusher" ).draggable({ disabled: true });
-        });
+        Cookies.set( "shape", "square", { expires: 1 });
+        location.reload();
+    });
 
-        $( "svg" ).mouseout(function() {
-            $( ".pusher" ).draggable( "enable" );
-        });
+    $( "#star-picker" ).click(function() {
+        Cookies.set( "shape", "star", { expires: 1 });
+        location.reload();
     });
 
     $( "#circle-picker" ).click(function() {
-        $( "svg" ).remove();
-        shape = "circle";
-        loadGraph("data/categorie.json");
-        $( "svg" ).mouseover(function() {
-            $( ".pusher" ).draggable({ disabled: true });
-        });
-
-        $( "svg" ).mouseout(function() {
-            $( ".pusher" ).draggable( "enable" );
-        });
+        Cookies.set( "shape", "circle", { expires: 1 });
+        location.reload();
     });
 
 });
