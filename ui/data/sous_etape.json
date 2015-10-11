@@ -1,6 +1,70 @@
 {
   "nodes": [
-    {}
+    {},
+    {
+      "name": "Berkeley DB"
+    },
+    {
+      "name": "Firebird"
+    },
+    {
+      "name": "Ingres"
+    },
+    {
+      "name": "Kexi"
+    },
+    {
+      "name": "MariaDB"
+    },
+    {
+      "name": "MySQL"
+    },
+    {
+      "name": "PostgreSQL"
+    },
+    {
+      "name": "LibO Base"
+    },
+    {
+      "name": "OOo Base"
+    }
   ],
-  "links": []
+  "links": [
+    {
+      "source": 0,
+      "target": 1
+    },
+    {
+      "source": 0,
+      "target": 2
+    },
+    {
+      "source": 0,
+      "target": 3
+    },
+    {
+      "source": 0,
+      "target": 4
+    },
+    {
+      "source": 0,
+      "target": 5
+    },
+    {
+      "source": 0,
+      "target": 6
+    },
+    {
+      "source": 0,
+      "target": 7
+    },
+    {
+      "source": 0,
+      "target": 8
+    },
+    {
+      "source": 0,
+      "target": 9
+    }
+  ]
 }
