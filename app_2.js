@@ -143,8 +143,10 @@ app.use(express.static(__dirname + '/bower_components/'))
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
     if (p == "a-propos") {
         res.render('a-propos.ejs', {});
-    } else if (p == "stats") {
-        res.render('stats.ejs', {});
+    } else if (p == "histogramme") {
+        res.render('histogramme.ejs', {});
+    } else if (p == "camembert") {
+        res.render('camembert.ejs', {});
     } else {
         loadDataMongo("subStep", param);
         res.render('index_2.ejs', {});

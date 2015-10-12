@@ -85,11 +85,11 @@ function loadGraph(dataFile)
           .enter().append("line")
           .attr("class", "link")
 
-      var gnodes = svg.selectAll('g.gnode')
+      var gnodes = svg.selectAll("g.gnode")
           .data(graph.nodes)
           .enter()
-          .append('g')
-          .classed('gnode', true)
+          .append("g")
+          .classed("gnode", true)
 
       /*var foreignObject = gnodes.append("foreignObject")
           //.data(graph.nodes)
@@ -167,8 +167,8 @@ function loadGraph(dataFile)
           .attr("class", "node")
           .attr("r", radiusCircle)
           .style("fill", shapeColor)
-          .on('mouseover', tip.show)
-          .on('mouseout', tip.hide)
+          .on("mouseover", tip.show)
+          .on("mouseout", tip.hide)
           .on("click", function(d) {
                 //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
                 //var f_url = d.name.replace(/'/g,'');
