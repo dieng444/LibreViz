@@ -23,9 +23,9 @@ labelState = testCustomDisplay("labelState", "on");
 
 // On n'envoie pas les mêmes données sur toutes les pages...
 if (location.pathname=="/") {
-    loadGraph("data/categorie.json", "silver");
+    loadGraph("data/categorie.json", "silver"); // deuxième paramètre ?
 } else
-    loadGraph("data/sous_etape.json", shapeColor);
+    loadGraph("/data/sous_etape.json", shapeColor); // deuxième paramètre ?
 
 // Chargement du graphe
 function loadGraph(dataFile)
@@ -125,9 +125,17 @@ function loadGraph(dataFile)
                     for (var i=0; i < tab_s.length; i++) {
                         url += tab_s[i]+"_";
                     }
-                    location.href = "/"+ url.substr(0, url.length - 1).trim();
+                    /*xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("GET","http://localhost:8001/"+url.substr(0, url.length - 1).trim(), true);
+					xmlhttp.onreadystatechange=function(){
+						if (xmlhttp.readyState==4 && xmlhttp.status==200){
+						   string=xmlhttp.responseText;
+						 }
+					}
+					xmlhttp.send();*/
+                    location.href = "category/"+ url.substr(0, url.length - 1).trim();
                 } else
-                    location.href = "/"+cleaned_url;
+                    location.href = "category/"+cleaned_url;
           ;})
           .call(force.drag);
 
@@ -183,9 +191,9 @@ function loadGraph(dataFile)
                     for (var i=0; i < tab_s.length; i++) {
                         url += tab_s[i]+"_";
                     }
-                    location.href = "/"+ url.substr(0, url.length - 1).trim();
+                    location.href = "category/"+ url.substr(0, url.length - 1).trim();
                 } else
-                    location.href = "/"+cleaned_url;
+                    location.href = "category/"+cleaned_url;
           ;})
           // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);

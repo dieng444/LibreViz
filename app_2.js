@@ -9,6 +9,14 @@ var ejs = require('ejs');
 
 var app = express();
 
+var router = express.Router();
+
+//console.log(router);
+
+app.get('/hello/:name', function(req, res) {
+    res.send('hello ' + req.params.name + '!');
+});
+
 var findCategories = function(db, callback) {
   var collection = db.collection('items');
   collection.distinct("categorie",function(err, result) {
@@ -62,7 +70,7 @@ function parser(result,fileName,type,param)
         if (type=="category") {
             items.unshift({"name":"Catégorie"});
         } else if(type=="subCategory") {
-            console.log(items);
+            //console.log(items);
             items.unshift({"name":param});
         } else {
             //console.log(items);
@@ -120,9 +128,9 @@ function loadDataMongo(type, param)
 /**
  * Spécification du chemin des fichiers static
  * */
-app.use(express.static(__dirname + '/ui/'))
-app.use(express.static(__dirname + '/node_modules/'))
-app.use(express.static(__dirname + '/bower_components/'))
+app.use(express.static(__dirname + '/ui'))
+app.use(express.static(__dirname + '/node_modules'))
+app.use(express.static(__dirname + '/bower_components'))
 /**
  * Route d'affichage des catégories
  * */
@@ -133,8 +141,9 @@ app.use(express.static(__dirname + '/bower_components/'))
 /**
  * Route d'affichage sous étapes
  * */
-.get('/:root', function(req, res) {
+.get('/category/:root', function(req, res) {
 
+    
     var p  = req.params.root,
         tab_s = p.split("_"),
     param = tab_s.length > 0 ? p.replace(/_/g," ") : p;

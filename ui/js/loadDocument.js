@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document ).ready(function() {
 
     // Activation de la tooltip du bouton qui gère la sidebar
     var flag = true;
