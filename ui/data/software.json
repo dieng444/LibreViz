@@ -2,34 +2,46 @@
   "nodes": [
     {},
     {
-      "name": "Navigateur Web"
+      "name": "Dillo"
     },
     {
-      "name": "Client de messagerie"
+      "name": "Epiphany"
     },
     {
-      "name": "Client de "
+      "name": "Firefox"
     },
     {
-      "name": "Visioconférence"
+      "name": "Flock"
     },
     {
-      "name": "Client "
+      "name": "Chromium"
     },
     {
-      "name": "Client IRC"
+      "name": "Iron"
     },
     {
-      "name": "Client "
+      "name": "Galeon"
     },
     {
-      "name": "Voix sur réseau IP"
+      "name": "Iceweasel"
     },
     {
-      "name": "Gestionnaire de téléchargement"
+      "name": "Konqueror"
     },
     {
-      "name": "Lecteur multimédia"
+      "name": "Links"
+    },
+    {
+      "name": "Lynx"
+    },
+    {
+      "name": "Midori"
+    },
+    {
+      "name": "SeaMonkey"
+    },
+    {
+      "name": "w3m"
     }
   ],
   "links": [
@@ -72,6 +84,22 @@
     {
       "source": 0,
       "target": 10
+    },
+    {
+      "source": 0,
+      "target": 11
+    },
+    {
+      "source": 0,
+      "target": 12
+    },
+    {
+      "source": 0,
+      "target": 13
+    },
+    {
+      "source": 0,
+      "target": 14
     }
   ]
 }

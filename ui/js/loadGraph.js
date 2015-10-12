@@ -22,17 +22,24 @@ labelColor = testCustomDisplay("labelColor", "black");
 labelState = testCustomDisplay("labelState", "on");
 
 // On n'envoie pas les mêmes données sur toutes les pages...
-if (location.pathname=="/") {
-    loadGraph("data/category.json", "silver"); // deuxième paramètre ?
-} else
+/**
+ * Petite subtilité pour cette première condition, car le pattern /categorie/
+ * existe dans la route des catégories et celles des sous-/catégorie/
+ * raison pour laquelle il faut vérifier que c'est bien le pattern /categorie/
+ * de la route "categorie" qui match et non celui de la route des sous-catégorie,
+ * pour éviter que le même fichier soit renvoyer dans les deux cas.
+ * */
+if (/categorie/i.test(location.pathname) && !(/sous-categori/i.test(location.pathname)))
     loadGraph("/data/subCategory.json", shapeColor); // deuxième paramètre ?
-
+else if (/sous-categorie/i.test(location.pathname))
+	loadGraph("/data/software.json", shapeColor); // deuxième paramètre ?
+else
+	loadGraph("data/category.json", "silver"); // deuxième paramètre ?
+	
 // Chargement du graphe
 function loadGraph(dataFile)
 {
-
     var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, scaleStar, textX, textY;
-
     // Le canevas et la taille des formes seront différents selon la définition d'écran
     if ($( window ).width() >= 1366) {
         width = 782;
@@ -91,15 +98,6 @@ function loadGraph(dataFile)
           .append("g")
           .classed("gnode", true)
 
-      /*var foreignObject = gnodes.append("foreignObject")
-          //.data(graph.nodes)
-          .attr("width", 100)
-          .attr("height", 100);*/
-
-      //var a = foreignObject.append('');
-          //.attr('href',"/"+function(d) { return d.name; })
-           //.text(function(d) { return d.name; });
-
     if (shape == "square") { // On crée des carrés...
 
         var node = gnodes.append("rect")
@@ -112,31 +110,31 @@ function loadGraph(dataFile)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
           .on("click", function(d) {
-                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
-                //var f_url = d.name.replace(/'/g,'');
-                //var s_url = d.name.replace(/" "/g,"_");
-                //location.href = "/"+d.name.trim();
-                //return;
-                //À voir pour SIG et les autres pour l'espace qui se trouve devant
-                var cleaned_url = d.name.trim();
-                var tab_s = cleaned_url.split(" "),
-                    url = " ";
-                if (tab_s.length > 1) {
-                    for (var i=0; i < tab_s.length; i++) {
-                        url += tab_s[i]+"_";
-                    }
-                    /*xmlhttp = new XMLHttpRequest();
-					xmlhttp.open("GET","http://localhost:8001/"+url.substr(0, url.length - 1).trim(), true);
-					xmlhttp.onreadystatechange=function(){
-						if (xmlhttp.readyState==4 && xmlhttp.status==200){
-						   string=xmlhttp.responseText;
-						 }
-					}
-					xmlhttp.send();*/
-                    location.href = "category/"+ url.substr(0, url.length - 1).trim();
-                } else
-                    location.href = "category/"+cleaned_url;
-          ;})
+                
+			/**
+			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
+			 * */
+			var cleaned_url = d.name.trim();
+			var tab_s = cleaned_url.split(" "),
+				url = " ",
+				fullUrl = " ";
+			if (tab_s.length > 1) {
+				for (var i=0; i < tab_s.length; i++) {
+					url += tab_s[i]+"_";
+				}
+			}
+			//Variable contenant l'url temporaire en formaté
+			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+			if (/categorie/i.test(location.pathname))
+				fullUrl = "/sous-categorie/" + tmp_url;
+			else if (/sous-categorie/i.test(location.pathname))
+				fullUrl = "/logiciel/" + tmp_url;
+			else
+				fullUrl = "/categorie/" + tmp_url;
+					
+			location.href = fullUrl;
+          })
           .call(force.drag);
 
     } else if (shape == "star") { // ... ou on crée des étoiles...
@@ -149,23 +147,31 @@ function loadGraph(dataFile)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
           .on("click", function(d) {
-                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
-                //var f_url = d.name.replace(/'/g,'');
-                //var s_url = d.name.replace(/" "/g,"_");
-                //location.href = "/"+d.name.trim();
-                //return;
-                //À voir pour SIG et les autres pour l'espace qui se trouve devant
-                var cleaned_url = d.name.trim();
-                var tab_s = cleaned_url.split(" "),
-                    url = " ";
-                if (tab_s.length > 1) {
-                    for (var i=0; i < tab_s.length; i++) {
-                        url += tab_s[i]+"_";
-                    }
-                    location.href = "/"+ url.substr(0, url.length - 1).trim();
-                } else
-                    location.href = "/"+cleaned_url;
-          ;})
+               
+			/**
+			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
+			 * */
+			var cleaned_url = d.name.trim();
+			var tab_s = cleaned_url.split(" "),
+				url = " ",
+				fullUrl = " ";
+			if (tab_s.length > 1) {
+				for (var i=0; i < tab_s.length; i++) {
+					url += tab_s[i]+"_";
+				}
+			}
+			//Variable contenant l'url temporaire en formaté
+			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+			if (/categorie/i.test(location.pathname))
+				fullUrl = "/sous-categorie/" + tmp_url;
+			else if (/sous-categorie/i.test(location.pathname))
+				fullUrl = "/logiciel/" + tmp_url;
+			else
+				fullUrl = "/categorie/" + tmp_url;
+					
+			location.href = fullUrl;
+          })
           // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);
 
@@ -178,23 +184,31 @@ function loadGraph(dataFile)
           .on("mouseover", tip.show)
           .on("mouseout", tip.hide)
           .on("click", function(d) {
-                //var f_url = d.name.replace(/è|é|ê|ë/,"e"),
-                //var f_url = d.name.replace(/'/g,'');
-                //var s_url = d.name.replace(/" "/g,"_");
-                //location.href = "/"+d.name.trim();
-                //return;
-                //À voir pour SIG et les autres pour l'espace qui se trouve devant
-                var cleaned_url = d.name.trim();
-                var tab_s = cleaned_url.split(" "),
-                    url = " ";
-                if (tab_s.length > 1) {
-                    for (var i=0; i < tab_s.length; i++) {
-                        url += tab_s[i]+"_";
-                    }
-                    location.href = "category/"+ url.substr(0, url.length - 1).trim();
-                } else
-                    location.href = "category/"+cleaned_url;
-          ;})
+			  
+			/**
+			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
+			 * */
+			var cleaned_url = d.name.trim();
+			var tab_s = cleaned_url.split(" "),
+				url = " ",
+				fullUrl = " ";
+			if (tab_s.length > 1) {
+				for (var i=0; i < tab_s.length; i++) {
+					url += tab_s[i]+"_";
+				}
+			}
+			//Variable contenant l'url temporaire en formaté
+			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+			if (/categorie/i.test(location.pathname))
+				fullUrl = "/sous-categorie/" + tmp_url;
+			else if (/sous-categorie/i.test(location.pathname))
+				fullUrl = "/logiciel/" + tmp_url;
+			else
+				fullUrl = "/categorie/" + tmp_url;
+				
+			location.href = fullUrl;
+          })
           // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);
 

@@ -49,14 +49,14 @@ function parser(result,fileName,type,param)
     items = [];
     links = [];
 	for(var i=0, j=1; i < result.length; i++, j++) {
-		if (type=="category") {
+		if (type=="category") { //Formatage des catégories
 			items[i] = {"name":result[i]};
 			links[i] = {"source":0,"target":j};
 		}
-		else if (type=="subCategory") {
+		else if (type=="subCategory") { //Formatage des sous-catégories
 			items[i] = {"name":result[i].fonctionnalite[0]};
 			links[i] = {"source":0,"target":j};
-		} else {
+		} else { //Formatage des logiciels
 			var sfw_tab = result[i].logiciel_libre_linux;
 			for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
 				items[k] = {"name":sfw_tab[k]};
@@ -80,14 +80,13 @@ function parser(result,fileName,type,param)
 	 * Création du fichier json
 	 * */
 	jsonfile.writeFile(fileName, data, {spaces: 2}, function (err) {
-		
+		//console.log("file created successfully");
 	});
 }
 /**
  * Permet de charger les données depuis MOngoDB
  * @param param : paramètre reçu de l'url
  * **/
- var isSubCategoryLoaded = false;
 
 function loadDataMongo(type, param)
 {
@@ -100,13 +99,12 @@ function loadDataMongo(type, param)
             });
         } else if(type=="subCategory") {
 			findSubCategories (param, db, function(result) {
-				parser(result,'ui/data/subCategory.json',"subCategory");
+				parser(result,'ui/data/subCategory.json',"subCategory",param);
 				db.close();
 			});
 		} else if(type=="software"){
 			findSoftware(param, db, function(result) {
-				//consoe.log(result);
-				parser(result,'ui/data/software.json',"software");
+				parser(result,'ui/data/software.json',"software",param);
 				db.close();
 			});
 		} else {
@@ -128,9 +126,9 @@ app.use(express.static(__dirname + '/bower_components'))
     res.render('index_2.ejs', {});
 })
 /**
- * Route d'affichage sous étapes
+ * Route d'affichage des sous-catégories d'une catégorie donnée
  * */
-.get('/category/:category', function(req, res) {
+.get('/categorie/:category', function(req, res) {
     var p  = req.params.category,
         tab_s = p.split("_"),
     param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
@@ -142,10 +140,21 @@ app.use(express.static(__dirname + '/bower_components'))
    
 })
 /**
- * Route d'affichage sous étapes
+ * Route d'affichage des logiciels d'une sous-catégorie donnée
  * */
-.get('/subcategory/:subcategory', function(req, res) {
+.get('/sous-categorie/:subcategory', function(req, res) {
     var p  = req.params.subcategory,
+        tab_s = p.split("_"),
+		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
+		
+	loadDataMongo("software", param);
+	res.render('index_2.ejs', {});
+})
+/**
+ * Route d'affichage des informations d'un logiciel donné
+ * */
+.get('/logiciel/:software', function(req, res) {
+    var p  = req.params.software,
         tab_s = p.split("_"),
 		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
 		
@@ -155,7 +164,7 @@ app.use(express.static(__dirname + '/bower_components'))
 /**
  * Affichage de la page À propos
  * */
-.get('/about', function(req, res) {
+.get('/a-propos', function(req, res) {
 	res.render('a-propos.ejs', {});
 })
 /**
