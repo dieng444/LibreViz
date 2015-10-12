@@ -1,47 +1,19 @@
 {
   "nodes": [
-    {},
     {
-      "name": "Dillo"
+      "name": "Calcul formel"
     },
     {
-      "name": "Epiphany"
+      "name": "Sage"
     },
     {
-      "name": "Firefox"
+      "name": "Maxima"
     },
     {
-      "name": "Flock"
+      "name": "Sympy"
     },
     {
-      "name": "Chromium"
-    },
-    {
-      "name": "Iron"
-    },
-    {
-      "name": "Galeon"
-    },
-    {
-      "name": "Iceweasel"
-    },
-    {
-      "name": "Konqueror"
-    },
-    {
-      "name": "Links"
-    },
-    {
-      "name": "Lynx"
-    },
-    {
-      "name": "Midori"
-    },
-    {
-      "name": "SeaMonkey"
-    },
-    {
-      "name": "w3m"
+      "name": "Python"
     }
   ],
   "links": [
@@ -60,46 +32,6 @@
     {
       "source": 0,
       "target": 4
-    },
-    {
-      "source": 0,
-      "target": 5
-    },
-    {
-      "source": 0,
-      "target": 6
-    },
-    {
-      "source": 0,
-      "target": 7
-    },
-    {
-      "source": 0,
-      "target": 8
-    },
-    {
-      "source": 0,
-      "target": 9
-    },
-    {
-      "source": 0,
-      "target": 10
-    },
-    {
-      "source": 0,
-      "target": 11
-    },
-    {
-      "source": 0,
-      "target": 12
-    },
-    {
-      "source": 0,
-      "target": 13
-    },
-    {
-      "source": 0,
-      "target": 14
     }
   ]
 }
