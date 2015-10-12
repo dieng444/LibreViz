@@ -23,9 +23,9 @@ labelState = testCustomDisplay("labelState", "on");
 
 // On n'envoie pas les mêmes données sur toutes les pages...
 if (location.pathname=="/") {
-    loadGraph("data/categorie.json", "silver"); // deuxième paramètre ?
+    loadGraph("data/category.json", "silver"); // deuxième paramètre ?
 } else
-    loadGraph("/data/sous_etape.json", shapeColor); // deuxième paramètre ?
+    loadGraph("/data/subCategory.json", shapeColor); // deuxième paramètre ?
 
 // Chargement du graphe
 function loadGraph(dataFile)

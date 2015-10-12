@@ -8,28 +8,27 @@ var jsonfile = require('jsonfile');
 var ejs = require('ejs');
 
 var app = express();
-
-var router = express.Router();
-
-//console.log(router);
-
-app.get('/hello/:name', function(req, res) {
-    res.send('hello ' + req.params.name + '!');
-});
-
+/**
+ * Recherche des catégories
+ * */
 var findCategories = function(db, callback) {
   var collection = db.collection('items');
   collection.distinct("categorie",function(err, result) {
     callback(result);
   });
 }
-
+/**
+ * Recherche des sous-catégories
+ * */
 var findSubCategories = function(category,db,callback) {
   var collection = db.collection('items');
    collection.find({categorie:category},{fonctionnalite:1}).toArray(function(err, result) {
     callback(result);
   });
 }
+/**
+ * Recherche des logiciels
+ * */
 var findSoftware = function(subCategory,db,callback) {
   var collection = db.collection('items');
    collection.find({fonctionnalite:subCategory},{logiciel_libre_linux:1}).toArray(function(err, result) {
@@ -49,46 +48,40 @@ function parser(result,fileName,type,param)
 {
     items = [];
     links = [];
-    //console.log(result);return;
-    //if(result.length > 0) {
-        for(var i=0, j=1; i < result.length; i++, j++) {
-            if (type=="category") {
-                items[i] = {"name":result[i]};
-                links[i] = {"source":0,"target":j};
-            }
-            else if (type=="subCategory") {
-                items[i] = {"name":result[i].fonctionnalite[0]};
-                links[i] = {"source":0,"target":j};
-            } else {
-                var sfw_tab = result[i].logiciel_libre_linux;
-                for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
-                    items[k] = {"name":sfw_tab[k]};
-                    links[k] = {"source":0,"target":l};
-                }
-            }
-        }
-        if (type=="category") {
-            items.unshift({"name":"Catégorie"});
-        } else if(type=="subCategory") {
-            //console.log(items);
-            items.unshift({"name":param});
-        } else {
-            //console.log(items);
-            items.unshift({"name":param});
-        }
+	for(var i=0, j=1; i < result.length; i++, j++) {
+		if (type=="category") {
+			items[i] = {"name":result[i]};
+			links[i] = {"source":0,"target":j};
+		}
+		else if (type=="subCategory") {
+			items[i] = {"name":result[i].fonctionnalite[0]};
+			links[i] = {"source":0,"target":j};
+		} else {
+			var sfw_tab = result[i].logiciel_libre_linux;
+			for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
+				items[k] = {"name":sfw_tab[k]};
+				links[k] = {"source":0,"target":l};
+			}
+		}
+	}
+	if (type=="category") {
+		items.unshift({"name":"Catégorie"});
+	} else if(type=="subCategory") {
+		items.unshift({"name":param});
+	} else if(type="software"){
+		items.unshift({"name":param});
+	} else {
+		console.log("Will comming soon");
+	}
 
-        var data = {'nodes':items,'links':links};
-        //console.log(data);
-        /**
-         * Création du fichier json
-         * */
-        jsonfile.writeFile(fileName, data, {spaces: 2}, function (err) {
-            //console.error(err)
-        });
-       // return res = true;
-    //~ } else {
-        //~ return res;
-    //~ }
+	var data = {'nodes':items,'links':links};
+	
+	/**
+	 * Création du fichier json
+	 * */
+	jsonfile.writeFile(fileName, data, {spaces: 2}, function (err) {
+		
+	});
 }
 /**
  * Permet de charger les données depuis MOngoDB
@@ -102,27 +95,23 @@ function loadDataMongo(type, param)
         console.log("Connected correctly to server");
         if(type=="category") {
             findCategories(db, function(result) {
-                parser(result,'ui/data/categorie.json',"category");
+                parser(result,'ui/data/category.json',"category");
                 db.close();
             });
-        } else {
-            if (!isSubCategoryLoaded) {
-                findSubCategories (param, db, function(result) {
-                    parser(result,'ui/data/sous_etape.json',"subCategory");
-                    db.close();
-                });
-                isSubCategoryLoaded = true;
-            } else {
-                if(isSubCategoryLoaded) {
-                    findSoftware(param, db, function(result) {
-                        //consoe.log(result);
-                        parser(result,'ui/data/sous_etape.json',"software");
-                        db.close();
-                    });
-                }
-                isSubCategoryLoaded = false;
-            }
-        }
+        } else if(type=="subCategory") {
+			findSubCategories (param, db, function(result) {
+				parser(result,'ui/data/subCategory.json',"subCategory");
+				db.close();
+			});
+		} else if(type=="software"){
+			findSoftware(param, db, function(result) {
+				//consoe.log(result);
+				parser(result,'ui/data/software.json',"software");
+				db.close();
+			});
+		} else {
+			console.log("comming soon");
+		}
     });
 }
 /**
@@ -141,27 +130,49 @@ app.use(express.static(__dirname + '/bower_components'))
 /**
  * Route d'affichage sous étapes
  * */
-.get('/category/:root', function(req, res) {
-
-    
-    var p  = req.params.root,
+.get('/category/:category', function(req, res) {
+    var p  = req.params.category,
         tab_s = p.split("_"),
     param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
     //var text_404 = '<h2 style="text-align:center;margin-top:40px;margin:auro;" class="well well-lg">Oups ! il semble que la donnée que vous cherchez n\'existe pas.</h2>';
     //console.log(loadDataMongo("subStep", param)+"tptp");
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
-    if (p == "a-propos") {
-        res.render('a-propos.ejs', {});
-    } else if (p == "histogramme") {
-        res.render('histogramme.ejs', {});
-    } else if (p == "camembert") {
-        res.render('camembert.ejs', {});
-    } else {
-        loadDataMongo("subStep", param);
-        res.render('index_2.ejs', {});
-    }
+	loadDataMongo("subCategory", param);
+	res.render('index_2.ejs', {});
+   
 })
-/*Recherche d'une sous-catégorie donnée*/
+/**
+ * Route d'affichage sous étapes
+ * */
+.get('/subcategory/:subcategory', function(req, res) {
+    var p  = req.params.subcategory,
+        tab_s = p.split("_"),
+		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
+		
+	loadDataMongo("software", param);
+	res.render('index_2.ejs', {});
+})
+/**
+ * Affichage de la page À propos
+ * */
+.get('/about', function(req, res) {
+	res.render('a-propos.ejs', {});
+})
+/**
+ * Affichage de la page Histogramme
+ * */
+.get('/histogramme', function(req, res) {
+	res.render('histogramme.ejs', {});
+})
+/**
+ * Affichage de la page Camembert
+ * */
+.get('/camembert', function(req, res) {
+	res.render('camembert.ejs', {});
+})
+/**
+ *  Recherche des logiciels
+ * */
 .post('/find', urlencodedParser, function(req, res) {
     if (req.body.term != '') {
         console.log(req.body.term);
@@ -169,8 +180,7 @@ app.use(express.static(__dirname + '/bower_components'))
     }
 
 });
-//~ app.use(function(req, res, next){
-    //~ res.setHeader('Content-Type', 'text/plain');
-    //~ res.send(404, 'Page introuvable !');
-//~ });
+/**
+ * Lancement du serveur sur le port 8080
+ * */
 app.listen(8080);
