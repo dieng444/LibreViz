@@ -32,8 +32,8 @@
 <!--
             <a class="item"><i class="line chart icon"></i>Statistiques</a>
 -->
-            <a class="item" href="/histogramme"><i class="bar chart icon"></i>Histogramme</a>
-            <a class="item" href="/camembert"><i class="pie chart icon"></i>Camembert</a>
+            <a class="item" href="/histogramme"><i class="bar chart icon"></i>Statistiques (1/2)</a>
+            <a class="item" href="/camembert"><i class="pie chart icon"></i>Statistiques (2/2)</a>
             <!-- Gestion des labels -->
             <a class="item ui toggle checkbox">
                 <input type="checkbox" id="toggleLabels">
@@ -86,9 +86,9 @@
                 <i class="world icon"></i>
                 Nos données (Wikipédia)
             </a>
-            <a class="item" href="http://alternativeto.net/" target="_blank">
-                <i class="world icon"></i>
-                Nos données (AlternativeTo)
+            <a class="item" id="popup">
+                <i class="browser icon"></i>
+                Test pop-up
             </a>
         </div>
         <!-- Zone de visualisation -->
@@ -97,7 +97,30 @@
                 <div id="power" title=""></div>
                 <img src="/images/tablet.png" alt="Écran" id="tablet" />
                 <div id="screen">
-					
+
+                </div>
+            </div>
+        </div>
+        <div class="ui long scrolling modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Test
+            </div>
+            <div class="image content">
+                <div class="ui small image">
+                    <img src="/images/test.png" alt="Test">
+                </div>
+                <div class="description">
+                    <div class="ui header">Test</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et auctor arcu. Aenean faucibus elementum ultrices. Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem. Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi at urna condimentum, at placerat elit sodales. Vestibulum ut dui et ante tincidunt malesuada a et odio. Morbi id suscipit dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. Donec gravida pharetra leo, at posuere lacus sodales et.</p>
+                    <div class="ui divider"></div>
+                    <p>Nunc iaculis erat ligula, sit amet interdum ex tincidunt lobortis. Fusce tristique fringilla dolor, ut ultricies libero lobortis dapibus. Sed vitae lacus finibus, malesuada velit ultricies, scelerisque dui. Sed ac bibendum nisi. Vestibulum volutpat, odio sed dictum volutpat, turpis eros lacinia turpis, ut eleifend arcu mi ut risus. Vestibulum eget magna at ipsum convallis tempor quis eget ex. Integer mollis, sapien in auctor interdum, justo felis malesuada elit, vel fermentum purus magna ut ante. Morbi ullamcorper rhoncus massa in sagittis.</p>
+                    <div class="ui divider"></div>
+                    <p>Sed vel ligula luctus, rutrum eros a, luctus felis. Nunc nibh sapien, elementum et enim quis, tempus ornare velit. Nam vitae porttitor leo, non scelerisque dolor. In tristique finibus leo eu pellentesque. Curabitur mattis, lorem id venenatis consectetur, nisi dui dignissim velit, non blandit neque ante sit amet purus. Quisque ac purus nec erat facilisis pretium. Etiam et gravida quam, quis finibus augue. Proin condimentum, lectus non venenatis semper, sapien justo condimentum lectus, non mollis massa tellus in felis. Donec volutpat quis quam id aliquet. Vivamus fringilla varius metus, non dignissim quam placerat sit amet. Donec mollis rhoncus varius. Morbi pulvinar porta quam, sit amet sollicitudin tellus sodales sit amet.</p>
+                    <div class="ui divider"></div>
+                    <p>Etiam commodo finibus arcu, a gravida justo placerat eu. Maecenas vitae ipsum volutpat, vehicula mauris quis, vestibulum eros. Donec lobortis tristique vulputate. Nunc venenatis est urna, ut consectetur arcu mollis a. Fusce dignissim congue nisl vitae ornare. Nulla sed mauris nibh. Cras ultricies libero laoreet convallis imperdiet. Etiam maximus ultrices iaculis. Integer ac enim nulla. Proin euismod feugiat tempus.</p>
+                    <div class="ui divider"></div>
+                    <p>Nam consectetur mi ut mi bibendum cursus. Nunc quis facilisis ligula. Fusce interdum scelerisque diam, et elementum enim rutrum vitae. Proin aliquet accumsan facilisis. Sed ut pellentesque libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris sit amet lacus condimentum, semper dolor at, malesuada nunc. Cras ut pulvinar felis, et malesuada sem. Integer fringilla fringilla felis. Integer blandit velit et dictum congue. Donec elementum sapien vel ligula congue venenatis. Quisque erat neque, sagittis eget facilisis ut, consectetur ac tortor. Sed dapibus, urna nec placerat luctus, libero ipsum tempus purus, et consectetur dui nunc eu leo.</p>
                 </div>
             </div>
         </div>
@@ -110,7 +133,7 @@
         <script src="/d3-tip/index.js"></script>
         <script src="/js/d3pie.min.js"></script>
         <script src="/js/<%= script %>"></script>
-       
+
     </body>
 </html>
 

@@ -4,7 +4,7 @@ $(document ).ready(function() {
     var flag = true;
     $( "#power" ).tooltip( {content: "Cacher le menu"} );
 
-    // Gestion du comportement de la sidebar
+    // Apparition/Disparition de la sidebar
     $( "#power" ).click(function() {
         // Si la sidebar n'est pas visible, le bouton est gris...
         if (flag == true) {
@@ -23,7 +23,7 @@ $(document ).ready(function() {
         $( ".ui.sidebar" ).toggle( "slide", "slow" );
     });
 
-    // Gestion du comportement de la tablette
+    // Gestion du drag & drop pour la tablette
     $( "#viz" ).draggable({ scroll: false });
 
     $( "svg" ).mouseover(function() {
@@ -32,6 +32,14 @@ $(document ).ready(function() {
 
     $( "svg" ).mouseout(function() {
         $( "#viz" ).draggable( "enable" );
+    });
+
+    // Gestion de la pop-up de logiciel (fiche de présentation)
+    $( "#popup" ).click(function() {
+         $('.ui.modal')
+            .modal('setting', 'transition', 'vertical flip')
+            .modal('show')
+        ;
     });
 
     // Gestion du module de recherche
