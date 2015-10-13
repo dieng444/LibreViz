@@ -123,7 +123,7 @@ app.use(express.static(__dirname + '/bower_components'))
  * */
 .get('/', function(req, res) {
     loadDataMongo("category");
-    res.render('index_2.ejs', {});
+    res.render('index_2.ejs', {script:"loadGraph.js"});
 })
 /**
  * Route d'affichage des sous-catégories d'une catégorie donnée
@@ -136,7 +136,7 @@ app.use(express.static(__dirname + '/bower_components'))
     //console.log(loadDataMongo("subStep", param)+"tptp");
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
 	loadDataMongo("subCategory", param);
-	res.render('index_2.ejs', {});
+	res.render('index_2.ejs', {script:"loadGraph.js"});
    
 })
 /**
@@ -148,7 +148,7 @@ app.use(express.static(__dirname + '/bower_components'))
 		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
 		
 	loadDataMongo("software", param);
-	res.render('index_2.ejs', {});
+	res.render('index_2.ejs', {script:"loadGraph.js"});
 })
 /**
  * Route d'affichage des informations d'un logiciel donné
@@ -159,7 +159,7 @@ app.use(express.static(__dirname + '/bower_components'))
 		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
 		
 	loadDataMongo("software", param);
-	res.render('index_2.ejs', {});
+	res.render('index_2.ejs', {script:"loadGraph.js"});
 })
 /**
  * Affichage de la page À propos
@@ -171,24 +171,25 @@ app.use(express.static(__dirname + '/bower_components'))
  * Affichage de la page Histogramme
  * */
 .get('/histogramme', function(req, res) {
-	res.render('histogramme.ejs', {});
+	res.render('index_2.ejs', {script:"loadBarChart.js"});
 })
 /**
  * Affichage de la page Camembert
  * */
 .get('/camembert', function(req, res) {
-	res.render('camembert.ejs', {});
+	res.render('index_2.ejs', {script:"loadPieChart.js"});
 })
 /**
  *  Recherche des logiciels
  * */
-.post('/find', urlencodedParser, function(req, res) {
+/*.post('/find', urlencodedParser, function(req, res) {
     if (req.body.term != '') {
         console.log(req.body.term);
-        res.redirect('/'+req.body.term);
+        //res.redirect('categorie/'+req.body.term);
+        location.href = '/categorie/'+req.body.term;
     }
 
-});
+});*/
 /**
  * Lancement du serveur sur le port 8080
  * */

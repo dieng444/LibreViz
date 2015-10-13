@@ -1,19 +1,31 @@
 {
   "nodes": [
     {
-      "name": "Calcul formel"
+      "name": "Gestion de projets"
     },
     {
-      "name": "Sage"
+      "name": "ProjectLibre"
     },
     {
-      "name": "Maxima"
+      "name": "Dotproject"
     },
     {
-      "name": "Sympy"
+      "name": "GanttProject"
     },
     {
-      "name": "Python"
+      "name": "Outreach"
+    },
+    {
+      "name": "Planner"
+    },
+    {
+      "name": "OpenProj"
+    },
+    {
+      "name": "eGroupWare"
+    },
+    {
+      "name": "FengOffice"
     }
   ],
   "links": [
@@ -32,6 +44,22 @@
     {
       "source": 0,
       "target": 4
+    },
+    {
+      "source": 0,
+      "target": 5
+    },
+    {
+      "source": 0,
+      "target": 6
+    },
+    {
+      "source": 0,
+      "target": 7
+    },
+    {
+      "source": 0,
+      "target": 8
     }
   ]
 }

@@ -54,7 +54,7 @@ $(document ).ready(function() {
                 {title: "Utilitaires"}
             ],
             onSelect: function(result, response) {
-                location.href = "categorie/" + result.title;
+                location.href = "/categorie/" + result.title;
             }
         })
     ;

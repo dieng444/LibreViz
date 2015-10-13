@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-    var pie = new d3pie("pieChart", {
+    var pie = new d3pie("screen", {
         "header": {
             "title": {
                 "text": "Catégories",
