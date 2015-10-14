@@ -8,11 +8,12 @@
         <link rel="stylesheet" href="/css/style.css" media="all">
         <link rel="stylesheet" href="/semantic/dist/semantic.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+        <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css" />
+        <link rel="stylesheet" href="/css/d3-tip.css">
    </head>
     <body>
         <!-- Menu (sidebar) -->
-        <div class="ui left vertical visible inverted sidebar menu">
+        <div class="ui left vertical visible inverted sidebar menu mCustomScrollbar">
             <h1 class="item">LibreViz</h1>
             <!-- Lecteur de musique -->
             <audio controls>
@@ -29,15 +30,25 @@
             </div>
             <!-- Liens divers -->
             <a class="item" href="/" id="home"><i class="home icon"></i>Accueil</a>
-<!--
-            <a class="item"><i class="line chart icon"></i>Statistiques</a>
--->
             <a class="item" href="/histogramme"><i class="bar chart icon"></i>Statistiques (1/2)</a>
             <a class="item" href="/camembert"><i class="pie chart icon"></i>Statistiques (2/2)</a>
             <!-- Gestion des labels -->
             <a class="item ui toggle checkbox">
                 <input type="checkbox" id="toggleLabels">
                 <label for="toggleLabels">Libellés (ON / OFF)</label>
+            </a>
+            <!-- Gestion du zoom -->
+            <a class="item" id="zoom-in">
+                <i class="zoom icon"></i>
+                Zoomer
+            </a>
+            <a class="item" id="zoom-out">
+                <i class="zoom out icon"></i>
+                Dézoomer
+            </a>
+            <a class="item" id="zoom-reset">
+                <i class="undo icon"></i>
+                Réinitialiser le zoom
             </a>
             <!-- Sélecteurs de couleurs -->
             <a class="item">
@@ -80,11 +91,11 @@
             </a>
             <a class="item" href="https://github.com/dieng444/crawling-project" target="_blank">
                 <i class="github icon"></i>
-                Le projet est sur GitHub !
+                Le projet sur GitHub
             </a>
             <a class="item" href="https://fr.wikipedia.org/wiki/Correspondance_entre_logiciels_libres_et_logiciels_propri%C3%A9taires" target="_blank">
                 <i class="world icon"></i>
-                Nos données (Wikipédia)
+                Données crawlées
             </a>
             <a class="item" id="popup">
                 <i class="browser icon"></i>
@@ -96,9 +107,7 @@
             <div id="viz">
                 <div id="power" title=""></div>
                 <img src="/images/tablet.png" alt="Écran" id="tablet" />
-                <div id="screen">
-
-                </div>
+                <div id="screen"></div>
             </div>
         </div>
         <div class="ui long scrolling modal">
@@ -126,14 +135,15 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="/semantic/dist/semantic.min.js"></script>
+        <script src="/js/jquery.panzoom.min.js"></script>
         <script src="/js-cookie/src/js.cookie.js"></script>
         <script src="/js/loadDocument.js"></script>
         <script src="/js/d3.min.js"></script>
         <script src="/d3-tip/index.js"></script>
         <script src="/js/d3pie.min.js"></script>
         <script src="/js/<%= script %>"></script>
-
     </body>
 </html>
 

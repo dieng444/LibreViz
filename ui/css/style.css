@@ -21,18 +21,30 @@ body {
     background-image: url('../images/desk.jpg')!important;
 }
 
+.pusher {
+    height: 100% !important;
+}
+
 img#tablet {
     width: 900px;
     display: block;
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1400px) {
 
     img#tablet {
         width: 650px;
         height: 499px;
     }
 
+}
+
+div#info-links {
+    text-align: center !important;
+}
+
+#mCSB_1_container {
+    margin-right: 0;
 }
 
 
@@ -152,7 +164,7 @@ svg {
     stroke-width: 4px;
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1400px) {
 
     #viz {
         width: 650px;
@@ -201,8 +213,11 @@ g:first-of-type > .node:hover {
 }
 
 text {
-    font-family: Ubuntu, sans-serif;
     font-weight: bold;
     font-variant: small-caps;
     cursor: pointer;
+}
+
+.d3-tip.e {
+    margin-left: 7px;
 }

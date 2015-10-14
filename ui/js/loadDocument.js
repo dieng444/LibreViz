@@ -10,7 +10,7 @@ $(document ).ready(function() {
         if (flag == true) {
             flag = false;
             $( this ).tooltip( {content: "Afficher le menu"} );
-            if ($( window ).width() >= 1366) {
+            if ($( window ).width() >= 1400) {
                 $( "#power" ).css( "background-position", "-51px 0" );
             } else {
                 $( "#power" ).css( "background-position", "-43px 0" );
@@ -27,7 +27,7 @@ $(document ).ready(function() {
     $( "#viz" ).draggable({ scroll: false });
 
     $( "svg" ).mouseover(function() {
-        $( "#viz" ).draggable({ disabled: true });
+        $( "#viz" ).draggable( "disable" );
     });
 
     $( "svg" ).mouseout(function() {
@@ -84,6 +84,16 @@ $(document ).ready(function() {
             Cookies.set( "labelState", "on", { expires: 1 });
             location.reload();
         }
+    });
+
+    // Gestion du zoom
+    $( "#viz" ).panzoom({
+        increment: 0.2,
+        minScale: 0.5,
+        maxScale: 1.5,
+        $zoomIn: $( "#zoom-in" ),
+        $zoomOut: $( "#zoom-out" ),
+        $reset: $( "#zoom-reset" )
     });
 
     // Gestion des couleurs

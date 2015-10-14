@@ -1,33 +1,55 @@
 $( document ).ready(function() {
 
+    // Le canevas sera différent selon la définition d'écran
+    var width, height, titleFontSize, subtitleFontSize, labelFontSize, pieInnerRadius, pieOuterRadius;
+
+    if ($( window ).width() >= 1400) {
+        width = 782;
+        height = 620;
+        titleFontSize = 35;
+        subtitleFontSize = 15;
+        labelFontSize = 15;
+        pieInnerRadius = "73%";
+        pieOuterRadius = "80%";
+    } else {
+        width = 570;
+        height = 451;
+        titleFontSize = 30;
+        subtitleFontSize = 13;
+        labelFontSize = 12;
+        pieInnerRadius = "83%";
+        pieOuterRadius = "77%";
+    }
+
+    // Construction de l'anneau
     var pie = new d3pie("screen", {
         "header": {
             "title": {
                 "text": "Catégories",
-                "fontSize": 34,
+                "fontSize": titleFontSize,
                 "font": "courier"
             },
             "subtitle": {
-                "text": "Quelles sont les plus populaires ? *",
+                "text": "Quelles sont les plus fournies ? *",
                 "color": "#999999",
-                "fontSize": 10,
+                "fontSize": subtitleFontSize,
                 "font": "courier"
             },
             "location": "pie-center",
             "titleSubtitlePadding": 10
         },
         "footer": {
-            "text": "* Déterminé en fonction du nombre de sous-catégories",
+            "text": "* Déterminé à partir du nombre de sous-catégories",
             "color": "#999999",
-            "fontSize": 10,
-            "font": "open sans",
-            "location": "bottom-left"
+            "fontSize": 15,
+            "font": "courier",
+            "location": "bottom-center"
         },
         "size": {
-            "canvasHeight": 620,
-            "canvasWidth": 782,
-            "pieInnerRadius": "80%",
-            "pieOuterRadius": "70%"
+            "canvasHeight": height,
+            "canvasWidth": width,
+            "pieInnerRadius": pieInnerRadius,
+            "pieOuterRadius": pieOuterRadius
         },
         "data": {
             "sortOrder": "label-asc",
@@ -73,12 +95,12 @@ $( document ).ready(function() {
                     "color": "#d0743c"
                 },
                 {
-                    "label": "Système d'information géographique",
+                    "label": "SIG",
                     "value": 1,
                     "color": "#6ada6a"
                 },
                 {
-                    "label": "Traduction de textes",
+                    "label": "Traduction",
                     "value": 1,
                     "color": "#0b6197"
                 },
@@ -103,16 +125,16 @@ $( document ).ready(function() {
                 "format": "none"
             },
             "mainLabel": {
-                "fontSize": 11
+                "fontSize": labelFontSize
             },
             "percentage": {
                 "color": "#999999",
-                "fontSize": 11,
+                "fontSize": 13,
                 "decimalPlaces": 0
             },
             "value": {
                 "color": "#cccc43",
-                "fontSize": 11
+                "fontSize": 13
             },
             "lines": {
                 "enabled": true,
@@ -130,7 +152,7 @@ $( document ).ready(function() {
         "effects": {
             "pullOutSegmentOnClick": {
                 "speed": 400,
-                "size": 8
+                "size": 10
             }
         },
         "misc": {

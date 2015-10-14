@@ -32,16 +32,16 @@ labelState = testCustomDisplay("labelState", "on");
 if (/categorie/i.test(location.pathname) && !(/sous-categori/i.test(location.pathname)))
     loadGraph("/data/subCategory.json", shapeColor); // deuxième paramètre ?
 else if (/sous-categorie/i.test(location.pathname))
-	loadGraph("/data/software.json", shapeColor); // deuxième paramètre ?
+    loadGraph("/data/software.json", shapeColor); // deuxième paramètre ?
 else
-	loadGraph("data/category.json", "silver"); // deuxième paramètre ?
-	
+    loadGraph("data/category.json", "silver"); // deuxième paramètre ?
+
 // Chargement du graphe
 function loadGraph(dataFile)
 {
     var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, scaleStar, textX, textY;
     // Le canevas et la taille des formes seront différents selon la définition d'écran
-    if ($( window ).width() >= 1366) {
+    if ($( window ).width() >= 1400) {
         width = 782;
         height = 620;
         linkDistance = 200;
@@ -110,30 +110,30 @@ function loadGraph(dataFile)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
           .on("click", function(d) {
-                
-			/**
-			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
-			 * */
-			var cleaned_url = d.name.trim();
-			var tab_s = cleaned_url.split(" "),
-				url = " ",
-				fullUrl = " ";
-			if (tab_s.length > 1) {
-				for (var i=0; i < tab_s.length; i++) {
-					url += tab_s[i]+"_";
-				}
-			}
-			//Variable contenant l'url temporaire en formaté
-			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
-			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-			if (/categorie/i.test(location.pathname))
-				fullUrl = "/sous-categorie/" + tmp_url;
-			else if (/sous-categorie/i.test(location.pathname))
-				fullUrl = "/logiciel/" + tmp_url;
-			else
-				fullUrl = "/categorie/" + tmp_url;
-					
-			location.href = fullUrl;
+
+            /**
+             * À voir pour SIG et les autres pour l'espace qui se trouve devant
+             * */
+            var cleaned_url = d.name.trim();
+            var tab_s = cleaned_url.split(" "),
+                url = " ",
+                fullUrl = " ";
+            if (tab_s.length > 1) {
+                for (var i=0; i < tab_s.length; i++) {
+                    url += tab_s[i]+"_";
+                }
+            }
+            //Variable contenant l'url temporaire en formaté
+            var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+            //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+            if (/categorie/i.test(location.pathname))
+                fullUrl = "/sous-categorie/" + tmp_url;
+            else if (/sous-categorie/i.test(location.pathname))
+                fullUrl = "/logiciel/" + tmp_url;
+            else
+                fullUrl = "/categorie/" + tmp_url;
+
+            location.href = fullUrl;
           })
           .call(force.drag);
 
@@ -147,32 +147,31 @@ function loadGraph(dataFile)
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide)
           .on("click", function(d) {
-               
-			/**
-			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
-			 * */
-			var cleaned_url = d.name.trim();
-			var tab_s = cleaned_url.split(" "),
-				url = " ",
-				fullUrl = " ";
-			if (tab_s.length > 1) {
-				for (var i=0; i < tab_s.length; i++) {
-					url += tab_s[i]+"_";
-				}
-			}
-			//Variable contenant l'url temporaire en formaté
-			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
-			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-			if (/categorie/i.test(location.pathname))
-				fullUrl = "/sous-categorie/" + tmp_url;
-			else if (/sous-categorie/i.test(location.pathname))
-				fullUrl = "/logiciel/" + tmp_url;
-			else
-				fullUrl = "/categorie/" + tmp_url;
-					
-			location.href = fullUrl;
+
+            /**
+             * À voir pour SIG et les autres pour l'espace qui se trouve devant
+             * */
+            var cleaned_url = d.name.trim();
+            var tab_s = cleaned_url.split(" "),
+                url = " ",
+                fullUrl = " ";
+            if (tab_s.length > 1) {
+                for (var i=0; i < tab_s.length; i++) {
+                    url += tab_s[i]+"_";
+                }
+            }
+            //Variable contenant l'url temporaire en formaté
+            var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+            //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+            if (/categorie/i.test(location.pathname))
+                fullUrl = "/sous-categorie/" + tmp_url;
+            else if (/sous-categorie/i.test(location.pathname))
+                fullUrl = "/logiciel/" + tmp_url;
+            else
+                fullUrl = "/categorie/" + tmp_url;
+
+            location.href = fullUrl;
           })
-          // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);
 
     } else {  // ... sinon on crée des cercles
@@ -184,32 +183,31 @@ function loadGraph(dataFile)
           .on("mouseover", tip.show)
           .on("mouseout", tip.hide)
           .on("click", function(d) {
-			  
-			/**
-			 * À voir pour SIG et les autres pour l'espace qui se trouve devant
-			 * */
-			var cleaned_url = d.name.trim();
-			var tab_s = cleaned_url.split(" "),
-				url = " ",
-				fullUrl = " ";
-			if (tab_s.length > 1) {
-				for (var i=0; i < tab_s.length; i++) {
-					url += tab_s[i]+"_";
-				}
-			}
-			//Variable contenant l'url temporaire en formaté
-			var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
-			//Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-			if (/categorie/i.test(location.pathname))
-				fullUrl = "/sous-categorie/" + tmp_url;
-			else if (/sous-categorie/i.test(location.pathname))
-				fullUrl = "/logiciel/" + tmp_url;
-			else
-				fullUrl = "/categorie/" + tmp_url;
-				
-			location.href = fullUrl;
+
+            /**
+             * À voir pour SIG et les autres pour l'espace qui se trouve devant
+             * */
+            var cleaned_url = d.name.trim();
+            var tab_s = cleaned_url.split(" "),
+                url = " ",
+                fullUrl = " ";
+            if (tab_s.length > 1) {
+                for (var i=0; i < tab_s.length; i++) {
+                    url += tab_s[i]+"_";
+                }
+            }
+            //Variable contenant l'url temporaire en formaté
+            var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
+            //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
+            if (/categorie/i.test(location.pathname))
+                fullUrl = "/sous-categorie/" + tmp_url;
+            else if (/sous-categorie/i.test(location.pathname))
+                fullUrl = "/logiciel/" + tmp_url;
+            else
+                fullUrl = "/categorie/" + tmp_url;
+
+            location.href = fullUrl;
           })
-          // .style("fill", function(d) { return color(d.group); })
           .call(force.drag);
 
      }
