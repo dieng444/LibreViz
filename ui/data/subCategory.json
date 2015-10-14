@@ -1,12 +1,29 @@
 {
   "nodes": [
     {
-      "name": "Loisirs"
+      "name": "Graphisme"
     },
     {
-      "name": "Généalogie"
+      "name": "Dessin assisté par ordinateur"
     },
-    {}
+    {
+      "name": "Conception assistée par ordinateur"
+    },
+    {
+      "name": "Dessin vectoriel"
+    },
+    {
+      "name": "Modélisation 3D"
+    },
+    {
+      "name": "Gestionnaire d'images"
+    },
+    {
+      "name": "Retouche d'image"
+    },
+    {
+      "name": "Visionneuse d'images"
+    }
   ],
   "links": [
     {
@@ -16,6 +33,26 @@
     {
       "source": 0,
       "target": 2
+    },
+    {
+      "source": 0,
+      "target": 3
+    },
+    {
+      "source": 0,
+      "target": 4
+    },
+    {
+      "source": 0,
+      "target": 5
+    },
+    {
+      "source": 0,
+      "target": 6
+    },
+    {
+      "source": 0,
+      "target": 7
     }
   ]
 }

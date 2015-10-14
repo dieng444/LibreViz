@@ -47,6 +47,10 @@ div#info-links {
     margin-right: 0;
 }
 
+.centered {
+    text-align: center;
+}
+
 
 /* ============================================================== */
 /* ========================== Sidebar ========================== */
@@ -102,7 +106,10 @@ h1 {
     cursor: pointer;
 }
 
-#colorpicker-forme, #colorpicker-fond, #shapepicker {
+#colorpicker-label,
+#colorpicker-shape,
+#colorpicker-background,
+#shapepicker {
     cursor: pointer;
 }
 

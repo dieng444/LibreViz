@@ -39,8 +39,9 @@ else
 // Chargement du graphe
 function loadGraph(dataFile)
 {
-    var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, scaleStar, textX, textY;
     // Le canevas et la taille des formes seront différents selon la définition d'écran
+    var vizWidth, vizHeight, linkDistance, radiusCircle, borderRect, scaleStar, textX, textY;
+
     if ($( window ).width() >= 1400) {
         width = 782;
         height = 620;
@@ -72,6 +73,7 @@ function loadGraph(dataFile)
         .attr('class', 'd3-tip')
         .html(function(d) { return "<span>" + d.name + "</span>"; });
 
+    // Création du canevas et création du graphe à partir des données
     var svg = d3.select("#screen")
         .append("svg")
         .attr("width", vizWidth)

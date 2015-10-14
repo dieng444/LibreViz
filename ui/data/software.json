@@ -1,25 +1,13 @@
 {
   "nodes": [
     {
-      "name": "Gestionnaire de téléchargement"
+      "name": "Moteurs de workflow"
     },
     {
-      "name": "cURL"
+      "name": "Bonita"
     },
     {
-      "name": "DownThemAll!"
-    },
-    {
-      "name": "extension"
-    },
-    {
-      "name": "KGet"
-    },
-    {
-      "name": "Wget"
-    },
-    {
-      "name": "wxDownload Fast"
+      "name": "ProcessMaker"
     }
   ],
   "links": [
@@ -30,22 +18,6 @@
     {
       "source": 0,
       "target": 2
-    },
-    {
-      "source": 0,
-      "target": 3
-    },
-    {
-      "source": 0,
-      "target": 4
-    },
-    {
-      "source": 0,
-      "target": 5
-    },
-    {
-      "source": 0,
-      "target": 6
     }
   ]
 }

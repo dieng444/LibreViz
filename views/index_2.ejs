@@ -32,6 +32,7 @@
             <a class="item" href="/" id="home"><i class="home icon"></i>Accueil</a>
             <a class="item" href="/histogramme"><i class="bar chart icon"></i>Statistiques (1/2)</a>
             <a class="item" href="/camembert"><i class="pie chart icon"></i>Statistiques (2/2)</a>
+            <a class="item" id="reset-prefs"><i class="remove user icon"></i>Supprimer les préférences</a>
             <!-- Gestion des labels -->
             <a class="item ui toggle checkbox">
                 <input type="checkbox" id="toggleLabels">
@@ -59,13 +60,13 @@
             </a>
             <a class="item">
                 <div class="container-colorpicker">
-                    <input type="color" id="colorpicker-forme" value="">
+                    <input type="color" id="colorpicker-shape" value="">
                     <label for="colorpicker-forme">Couleur des formes</label>
                 </div>
             </a>
             <a class="item">
                 <div class="container-colorpicker">
-                    <input type="color" id="colorpicker-fond" value="">
+                    <input type="color" id="colorpicker-background" value="">
                     <label for="colorpicker-fond">Couleur de fond</label>
                 </div>
             </a>
@@ -108,6 +109,23 @@
                 <div id="power" title=""></div>
                 <img src="/images/tablet.png" alt="Écran" id="tablet" />
                 <div id="screen"></div>
+            </div>
+        </div>
+        <!-- Popups -->
+        <div class="ui small modal">
+            <div class="ui icon header">
+                <i class="settings icon"></i>
+                Voulez-vous vraiment supprimer vos préférences ?
+            </div>
+            <div class="actions">
+                <div class="ui red cancel inverted button">
+                    <i class="remove icon"></i>
+                    Non
+                </div>
+                <div class="ui green ok inverted button">
+                    <i class="checkmark icon"></i>
+                    Oui
+                </div>
             </div>
         </div>
         <div class="ui long scrolling modal">
