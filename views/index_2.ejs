@@ -108,7 +108,12 @@
             <div id="viz">
                 <div id="power" title=""></div>
                 <img src="/images/tablet.png" alt="Écran" id="tablet" />
-                <div id="screen"></div>
+                <!-- Zone d'affichage du contenue de la tablette -->
+                <div id="screen">
+					<% if (typeof isAboutPage != 'undefined' && isAboutPage) { %>
+					  <%- include('a-propos.ejs') %>
+					<% } %>
+                </div>
             </div>
         </div>
         <!-- Popups -->

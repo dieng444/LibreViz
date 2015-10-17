@@ -165,7 +165,7 @@ app.use(express.static(__dirname + '/bower_components'))
  * Affichage de la page À propos
  * */
 .get('/a-propos', function(req, res) {
-	res.render('a-propos.ejs', {});
+	res.render('index_2.ejs', {isAboutPage:true,script:null});
 })
 /**
  * Affichage de la page Histogramme
