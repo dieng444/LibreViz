@@ -29,7 +29,7 @@ labelState = testCustomDisplay("labelState", "on");
  * de la route "categorie" qui match et non celui de la route des sous-catégorie,
  * pour éviter que le même fichier soit renvoyer dans les deux cas.
  * */
-if (/categorie/i.test(location.pathname) && !(/sous-categori/i.test(location.pathname)))
+if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname))
     loadGraph("/data/subCategory.json", shapeColor); // deuxième paramètre ?
 else if (/sous-categorie/i.test(location.pathname))
     loadGraph("/data/software.json", shapeColor); // deuxième paramètre ?
@@ -201,10 +201,13 @@ function loadGraph(dataFile)
             //Variable contenant l'url temporaire en formaté
             var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
             //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-            if (/categorie/i.test(location.pathname))
+            if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname)) {
                 fullUrl = "/sous-categorie/" + tmp_url;
-            else if (/sous-categorie/i.test(location.pathname))
-                fullUrl = "/logiciel/" + tmp_url;
+			} else if (/sous-categorie/i.test(location.pathname)) {
+                loadDocument.ajax.send(tmp_url);
+                loadDocument.showPopup();
+                return;
+			}
             else
                 fullUrl = "/categorie/" + tmp_url;
 
