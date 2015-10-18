@@ -69,16 +69,16 @@ var findSubCategories = function(category,db,callback) {
   });
 }
 /**
- * Recherche des logiciels
+ * Recherche les logiciels d'une sous-catégorie donnée
  * */
-var findSoftware = function(subCategory,db,callback) {
+var findSoftwaresBySubCategory = function(subCategory,db,callback) {
   var collection = db.collection('items');
    collection.find({fonctionnalite:subCategory},{logiciel_libre_linux:1}).toArray(function(err, result) {
     callback(result);
   });
 }
 /**
- * Recherche des logiciels
+ * Recherche les informations d'un logiciel donné
  * */
 var findSoftwareInfos = function(software,db,callback) {
   var collection = db.collection('softwares');
@@ -86,6 +86,16 @@ var findSoftwareInfos = function(software,db,callback) {
     callback(result);
   });
 }
+/**
+ * Recherche les logiciels correspondant au critère de recherche
+ * */
+var findSoftwares = function(param,db,callback) {
+  var collection = db.collection('softwares');
+   collection.find({name: new RegExp(param,'i')}).toArray(function(err, result) {
+    callback(result);
+  });
+}
+
 var url = 'mongodb://localhost:27017/crawlingproject';
 var items;
 var links;
@@ -156,7 +166,7 @@ function loadDataMongo(type, param)
 				db.close();
 			});
 		} else if(type=="software"){
-			findSoftware(param, db, function(result) {
+			findSoftwaresBySubCategory(param, db, function(result) {
 				parser(result,'ui/data/software.json',"software",param);
 				db.close();
 			});
@@ -218,6 +228,18 @@ app.use(express.static(__dirname + '/bower_components'))
 	});
 })
 /**
+ * Renvoie la liste des logiciels correspondant au critère de recherche
+ * */
+.get('/search/:term', function(req, res) {
+	MongoClient.connect(url, function(err, db) {
+		findSoftwares(req.params.term, db, function(result) {
+			db.close();
+			res.set('Content-Type','application/json');
+			res.send({result:result});
+		});
+	});
+})
+/**
  * Affichage de la page À propos
  * */
 .get('/a-propos', function(req, res) {
@@ -235,17 +257,6 @@ app.use(express.static(__dirname + '/bower_components'))
 .get('/camembert', function(req, res) {
 	res.render('index_2.ejs', {script:"loadPieChart.js"});
 })
-/**
- *  Recherche des logiciels
- * */
-/*.post('/find', urlencodedParser, function(req, res) {
-    if (req.body.term != '') {
-        console.log(req.body.term);
-        //res.redirect('categorie/'+req.body.term);
-        location.href = '/categorie/'+req.body.term;
-    }
-
-});*/
 /**
  * Lancement du serveur sur le port 8080
  * */

@@ -1,5 +1,6 @@
 loadDocument = {
 	
+	obj : this,
 	load : function() {
 		// Apparition/Disparition de la sidebar
 		var sidebarStatus = Cookies.get( "sidebarStatus" );
@@ -54,13 +55,7 @@ loadDocument = {
 		$( "#viz" ).css( "transform", "translate(" + left + "px, " + top + "px)" );
 
 		// Gestion du module de recherche
-		$('.ui.search')
-			.search({
-				maxResults: 10,
-				source: [
-					{title: "Bureautique"},
-					{title: "Graphisme"},
-					{title: "Internet"},
+		/*{title: "Internet"},
 					{title: "Loisirs"},
 					{title: "Multimédia"},
 					{title: "Progiciels"},
@@ -70,14 +65,96 @@ loadDocument = {
 					{title: "Système d'information géographique"},
 					{title: "Traduction de textes"},
 					{title: "Mathématique (y compris enseignement)"},
-					{title: "Utilitaires"}
-				],
+					{title: "Utilitaires"}*/
+		$('.ui.search')
+			.search({
+				maxResults: 10,
+				type : 'category',
+				//minCharacters : 2,
+				apiSettings   : {
+				  url: 'http://localhost:8080/search/{query}',
+				  onResponse : function(serverResponse) {
+					var response = { results : {} };
+					if(!serverResponse || !serverResponse.result) {
+					  return;
+					}
+					// Transformation de la réponse du serveur
+					// enfin qu'elle fontionne avec le search
+					$.each(serverResponse.result, function(index, item) {
+					  var name   = item.name || 'Unknown',
+						  maxResults = 8;
+						  
+					  if(index >= maxResults) {
+						return false;
+					  }
+					  // création d'une nouvelle catégorie de nom
+					  if(response.results[name] === undefined) {
+						response.results[name] = {
+						  name : name,
+						  results : []
+						};
+					  }
+					  // ajout du résultat à la catégorie
+					  response.results[name].results.push({
+						title : item.name,
+						/*description : item.description,
+						url : "http://localhost:8080/"*/
+						
+					  });
+					});
+					return response;
+				  }
+				},
+				/*apiSettings: {
+					
+					onResponse: function(response) {
+						var results = {};
+						$.map(response.result, function(item) {
+							results['title'] = item.name;
+						});
+						console.log(results);
+						return results;
+					},
+				  url: "http://localhost:8080/logiciels"
+				},*/
+				/*source: [
+					{title: "Firefox"},
+					{title: "Opera"},
+					],*/
+				
+				//searchFields : ['name'],
+					/*[
+					{title: "Firefox"},
+					{title: "Opera"},
+					],*/
 				onSelect: function(result, response) {
-					location.href = "/categorie/" + result.title;
+					//location.href = "/categorie/" + result.title;
+					$.ajax({
+					  url: "http://localhost:8080/logiciel/"+result.title,
+					  type: "GET",
+					  //data: {software:result.title},
+					  dataType: "json"
+					}).success(function(data){
+						var item = data.result[0];
+						var content = '<i class="close icon"></i>\n\
+										<div class="header">'+item.name+'</div>\n\
+										<div class="image content">\n\
+											<div class="ui small image">\n\
+												<img src="/images/'+item.image+'" alt="'+item.name+'">\n\
+											</div>\n\
+											<div class="description">\n\
+												<div class="ui header">'+item.name+'</div>\n\
+												<p>'+item.description+'</p>\n\
+											</div>\n\
+										</div>';
+										
+						$("div.modal").html(content);
+						 $('.ui.long.modal')
+						.modal('setting', 'transition', 'vertical flip')
+						.modal('show');
+					});
 				}
-			})
-		;
-
+			});
 		// Suppression des préférences
 		$( "#reset-prefs" ).click(function() {
 			$(".ui.small.modal").modal("setting", {
@@ -205,7 +282,7 @@ loadDocument = {
 				$.ajax({
 					  url: "http://localhost:8080/logiciel/"+software,
 					  type: "GET",
-					  data: {software:software},
+					  //data: {software:software},
 					  dataType: "json"
 				}).success(this.parseSoftwareInfo);
 		}
