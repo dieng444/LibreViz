@@ -30,15 +30,6 @@ img#tablet {
     display: block;
 }
 
-@media screen and (max-width: 1400px) {
-
-    img#tablet {
-        width: 650px;
-        height: 499px;
-    }
-
-}
-
 div#info-links {
     text-align: center !important;
 }
@@ -51,6 +42,14 @@ div#info-links {
     text-align: center;
 }
 
+@media screen and (max-width: 1400px) {
+
+    img#tablet {
+        width: 650px;
+        height: 499px;
+    }
+
+}
 
 /* ============================================================== */
 /* ========================== Sidebar ========================== */
@@ -171,6 +170,25 @@ svg {
     stroke-width: 4px;
 }
 
+g:first-of-type > .node {
+    fill: gray;
+}
+
+g:first-of-type > .node:hover {
+    fill: gray;
+    cursor: move;
+}
+
+text {
+    font-weight: bold;
+    font-variant: small-caps;
+    cursor: pointer;
+}
+
+.d3-tip.e {
+    margin-left: 7px;
+}
+
 @media screen and (max-width: 1400px) {
 
     #viz {
@@ -210,42 +228,69 @@ svg {
 
 }
 
-g:first-of-type > .node {
-    fill: gray;
-}
+/* ============================================================== */
+/* ========================== À propos ========================= */
+/* ============================================================ */
 
-g:first-of-type > .node:hover {
-    fill: gray;
-    cursor: move;
-}
 
-text {
-    font-weight: bold;
-    font-variant: small-caps;
-    cursor: pointer;
-}
-
-.d3-tip.e {
-    margin-left: 7px;
-}
-/******************Page à propos********************/
 #a-propos {
-	width: 550px;
-	margin: 15px;
+    background-color: #F2F2F2;
+    width: 782px;
+    height: 620px;
+    margin-top: 35px;
+    cursor: initial;
+    border-radius: 35px;
+    box-shadow: 0 0 7px white;
+}
+
+#auteurs {
+    margin-top: 35px;
 }
 
 .card {
-	width: 230px !important;
-	display: inline-block !important;
-	margin-top: 20px;
-	margin-left: auto !important;
-	margin-right: auto !important;
+    width: 280px !important;
+    display: inline-block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .message {
-	border-radius: 0 !important;
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+    border-radius: 35px 35px 0 0 !important;
 }
 
 p.header {
-	text-align: center;
+    width: 85%;
+    text-align: center;
+    margin: auto !important;
+    font-size: 20px !important;
+}
+
+@media screen and (max-width: 1400px) {
+
+    #a-propos {
+        width: 570px;
+        height: 451px;
+        border-radius: 25px;
+    }
+
+    #auteurs {
+        margin-top: 0 !important;
+    }
+
+    .card {
+        width: 210px !important;
+    }
+
+    .message {
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+        border-radius: 26px 26px 0 0 !important;
+    }
+
+    p.header {
+        font-size: 16px !important;
+    }
+
 }

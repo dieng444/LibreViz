@@ -1,37 +1,28 @@
 {
   "nodes": [
     {
-      "name": "Internet"
+      "name": "Graphisme"
     },
     {
-      "name": "Navigateur Web"
+      "name": "Dessin assisté par ordinateur"
     },
     {
-      "name": "Client de messagerie"
+      "name": "Conception assistée par ordinateur"
     },
     {
-      "name": "Client de "
+      "name": "Dessin vectoriel"
     },
     {
-      "name": "Visioconférence"
+      "name": "Modélisation 3D"
     },
     {
-      "name": "Client "
+      "name": "Gestionnaire d'images"
     },
     {
-      "name": "Client IRC"
+      "name": "Retouche d'image"
     },
     {
-      "name": "Client "
-    },
-    {
-      "name": "Voix sur réseau IP"
-    },
-    {
-      "name": "Gestionnaire de téléchargement"
-    },
-    {
-      "name": "Lecteur multimédia"
+      "name": "Visionneuse d'images"
     }
   ],
   "links": [
@@ -62,18 +53,6 @@
     {
       "source": 0,
       "target": 7
-    },
-    {
-      "source": 0,
-      "target": 8
-    },
-    {
-      "source": 0,
-      "target": 9
-    },
-    {
-      "source": 0,
-      "target": 10
     }
   ]
 }
