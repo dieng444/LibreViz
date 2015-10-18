@@ -14,40 +14,40 @@ var app = express();
 var addSoftwares = function(db, callback) {
   var collection = db.collection('softwares');
   collection.insert(
-		{
-			name: "Firefox",
-			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
-						 Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
-						 Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
-						 Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
-						 risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
-						 tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
-						 at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
-						 dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
-						 dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
-						 Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
-						 Donec gravida pharetra leo, at posuere lacus sodales et',
-			version:"40",
-			image:"test.png"
-		});
-		
-	collection.insert(
-		{
-			name: "Opera",
-			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
-						 Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
-						 Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
-						 Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
-						 risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
-						 tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
-						 at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
-						 dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
-						 dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
-						 Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
-						 Donec gravida pharetra leo, at posuere lacus sodales et',
-			version: "40",
-			image:"test.png"
-		});
+        {
+            name: "Firefox",
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
+                         Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
+                         Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
+                         Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
+                         risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
+                         tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
+                         at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
+                         dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
+                         dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
+                         Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
+                         Donec gravida pharetra leo, at posuere lacus sodales et',
+            version:"40",
+            image:"test.png"
+        });
+
+    collection.insert(
+        {
+            name: "Opera",
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
+                         Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
+                         Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
+                         Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
+                         risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
+                         tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
+                         at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
+                         dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
+                         dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
+                         Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
+                         Donec gravida pharetra leo, at posuere lacus sodales et',
+            version: "40",
+            image:"test.png"
+        });
    //callback(result);
 }
 /**
@@ -109,38 +109,38 @@ function parser(result,fileName,type,param)
 {
     items = [];
     links = [];
-	for(var i=0, j=1; i < result.length; i++, j++) {
-		if (type=="category") { //Formatage des catégories
-			items[i] = {"name":result[i]};
-			links[i] = {"source":0,"target":j};
-		}
-		else if (type=="subCategory") { //Formatage des sous-catégories
-			items[i] = {"name":result[i].fonctionnalite[0]};
-			links[i] = {"source":0,"target":j};
-		} else { //Formatage des logiciels
-			var sfw_tab = result[i].logiciel_libre_linux;
-			for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
-				items[k] = {"name":sfw_tab[k]};
-				links[k] = {"source":0,"target":l};
-			}
-		}
-	}
-	if (type=="category") {
-		items.unshift({"name":"Catégorie"});
-	} else if(type=="subCategory") {
-		items.unshift({"name":param});
-	} else if(type="software"){
-		items.unshift({"name":param});
-	}
+    for(var i=0, j=1; i < result.length; i++, j++) {
+        if (type=="category") { //Formatage des catégories
+            items[i] = {"name":result[i]};
+            links[i] = {"source":0,"target":j};
+        }
+        else if (type=="subCategory") { //Formatage des sous-catégories
+            items[i] = {"name":result[i].fonctionnalite[0]};
+            links[i] = {"source":0,"target":j};
+        } else { //Formatage des logiciels
+            var sfw_tab = result[i].logiciel_libre_linux;
+            for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
+                items[k] = {"name":sfw_tab[k]};
+                links[k] = {"source":0,"target":l};
+            }
+        }
+    }
+    if (type=="category") {
+        items.unshift({"name":"Catégorie"});
+    } else if(type=="subCategory") {
+        items.unshift({"name":param});
+    } else if(type="software"){
+        items.unshift({"name":param});
+    }
 
-	var data = {'nodes':items,'links':links};
-	
-	/**
-	 * Création du fichier json
-	 * */
-	jsonfile.writeFile(fileName, data, {spaces: 2}, function (err) {
-		//console.log("file created successfully");
-	});
+    var data = {'nodes':items,'links':links};
+
+    /**
+     * Création du fichier json
+     * */
+    jsonfile.writeFile(fileName, data, {spaces: 2}, function (err) {
+        //console.log("file created successfully");
+    });
 }
 /**
  * Permet de charger les données depuis MOngoDB
@@ -151,26 +151,26 @@ function loadDataMongo(type, param)
 {
     MongoClient.connect(url, function(err, db) {
         console.log("Connected correctly to server");
-        /*addSoftwares(db,function(){
-			console.log("data inserted successfully");
-			db.close();
-		});*/
+        //~ addSoftwares(db,function(){
+            //~ console.log("data inserted successfully");
+            //~ db.close();
+        //~ });
         if(type=="category") {
             findCategories(db, function(result) {
                 parser(result,'ui/data/category.json',"category");
                 db.close();
             });
         } else if(type=="subCategory") {
-			findSubCategories (param, db, function(result) {
-				parser(result,'ui/data/subCategory.json',"subCategory",param);
-				db.close();
-			});
-		} else if(type=="software"){
-			findSoftwaresBySubCategory(param, db, function(result) {
-				parser(result,'ui/data/software.json',"software",param);
-				db.close();
-			});
-		}
+            findSubCategories (param, db, function(result) {
+                parser(result,'ui/data/subCategory.json',"subCategory",param);
+                db.close();
+            });
+        } else if(type=="software"){
+            findSoftwaresBySubCategory(param, db, function(result) {
+                parser(result,'ui/data/software.json',"software",param);
+                db.close();
+            });
+        }
     });
 }
 /**
@@ -196,9 +196,9 @@ app.use(express.static(__dirname + '/bower_components'))
     //var text_404 = '<h2 style="text-align:center;margin-top:40px;margin:auro;" class="well well-lg">Oups ! il semble que la donnée que vous cherchez n\'existe pas.</h2>';
     //console.log(loadDataMongo("subStep", param)+"tptp");
     //loadDataMongo("subStep", param) ? res.render('index_2.ejs', {}) : res.status(404).send(text_404);
-	loadDataMongo("subCategory", param);
-	res.render('index_2.ejs', {script:"loadGraph.js"});
-   
+    loadDataMongo("subCategory", param);
+    res.render('index_2.ejs', {script:"loadGraph.js"});
+
 })
 /**
  * Route d'affichage des logiciels d'une sous-catégorie donnée
@@ -206,10 +206,10 @@ app.use(express.static(__dirname + '/bower_components'))
 .get('/sous-categorie/:subcategory', function(req, res) {
     var p  = req.params.subcategory,
         tab_s = p.split("_"),
-		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
-		
-	loadDataMongo("software", param);
-	res.render('index_2.ejs', {script:"loadGraph.js"});
+        param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
+
+    loadDataMongo("software", param);
+    res.render('index_2.ejs', {script:"loadGraph.js"});
 })
 /**
  * Route d'affichage des informations d'un logiciel donné
@@ -217,45 +217,45 @@ app.use(express.static(__dirname + '/bower_components'))
 .get('/logiciel/:software', function(req, res) {
     var p  = req.params.software,
         tab_s = p.split("_"),
-		param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
-		
-	MongoClient.connect(url, function(err, db) {
-		findSoftwareInfos(param, db, function(result) {
-			db.close();
-			res.set('Content-Type','application/json');
-			res.send({result:result});
-		});
-	});
+        param = tab_s.length > 0 ? p.replace(/_/g," ") : p;
+
+    MongoClient.connect(url, function(err, db) {
+        findSoftwareInfos(param, db, function(result) {
+            db.close();
+            res.set('Content-Type','application/json');
+            res.send({result:result});
+        });
+    });
 })
 /**
  * Renvoie la liste des logiciels correspondant au critère de recherche
  * */
 .get('/search/:term', function(req, res) {
-	MongoClient.connect(url, function(err, db) {
-		findSoftwares(req.params.term, db, function(result) {
-			db.close();
-			res.set('Content-Type','application/json');
-			res.send({result:result});
-		});
-	});
+    MongoClient.connect(url, function(err, db) {
+        findSoftwares(req.params.term, db, function(result) {
+            db.close();
+            res.set('Content-Type','application/json');
+            res.send({result:result});
+        });
+    });
 })
 /**
  * Affichage de la page À propos
  * */
 .get('/a-propos', function(req, res) {
-	res.render('index_2.ejs', {isAboutPage:true,script:null});
+    res.render('index_2.ejs', {isAboutPage:true,script:null});
 })
 /**
  * Affichage de la page Histogramme
  * */
 .get('/histogramme', function(req, res) {
-	res.render('index_2.ejs', {script:"loadBarChart.js"});
+    res.render('index_2.ejs', {script:"loadBarChart.js"});
 })
 /**
  * Affichage de la page Camembert
  * */
 .get('/camembert', function(req, res) {
-	res.render('index_2.ejs', {script:"loadPieChart.js"});
+    res.render('index_2.ejs', {script:"loadPieChart.js"});
 })
 /**
  * Lancement du serveur sur le port 8080

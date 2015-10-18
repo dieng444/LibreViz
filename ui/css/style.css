@@ -78,6 +78,10 @@ h1 {
     border-radius: 0 !important;
 }
 
+.ui.search > .results > .category > .result {
+    margin-left: 0 !important;
+}
+
 #home {
     margin-top: 42px;
 }

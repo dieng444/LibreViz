@@ -98,10 +98,6 @@
                 <i class="world icon"></i>
                 Données crawlées
             </a>
-            <a class="item" id="popup">
-                <i class="browser icon"></i>
-                Test pop-up
-            </a>
         </div>
         <!-- Zone de visualisation -->
         <div class="pusher">
@@ -110,9 +106,9 @@
                 <img src="/images/tablet.png" alt="Écran" id="tablet" />
                 <!-- Zone d'affichage du contenue de la tablette -->
                 <div id="screen">
-					<% if (typeof isAboutPage != 'undefined' && isAboutPage) { %>
-					  <%- include('a-propos.ejs') %>
-					<% } %>
+                    <% if (typeof isAboutPage != 'undefined' && isAboutPage) { %>
+                      <%- include('a-propos.ejs') %>
+                    <% } %>
                 </div>
             </div>
         </div>
