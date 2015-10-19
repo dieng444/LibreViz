@@ -1,8 +1,6 @@
 loadDocument = {
 
-    obj : this,
     load : function() {
-
         // Apparition/Disparition de la sidebar
         var sidebarStatus = Cookies.get( "sidebarStatus" );
         var flag;
@@ -60,8 +58,7 @@ loadDocument = {
             .search({
                 maxResults: 10,
                 type : 'category',
-                //minCharacters : 2,
-                apiSettings   : {
+                apiSettings : {
                   url: 'http://localhost:8080/search/{query}',
                   onResponse : function(serverResponse) {
                     var response = { results : {} };
@@ -73,50 +70,23 @@ loadDocument = {
                     $.each(serverResponse.result, function(index, item) {
                       var name   = item.name || 'Unknown',
                           maxResults = 8;
-
                       if(index >= maxResults) {
                         return false;
                       }
                       // création d'une nouvelle catégorie de nom
                       if(response.results[name] === undefined) {
                         response.results[name] = {
-                          // name : name,
                           results : []
                         };
                       }
                       // ajout du résultat à la catégorie
                       response.results[name].results.push({
                         title : item.name,
-                        /*description : item.description,
-                        url : "http://localhost:8080/"*/
-
                       });
                     });
                     return response;
                   }
                 },
-                /*apiSettings: {
-
-                    onResponse: function(response) {
-                        var results = {};
-                        $.map(response.result, function(item) {
-                            results['title'] = item.name;
-                        });
-                        console.log(results);
-                        return results;
-                    },
-                  url: "http://localhost:8080/logiciels"
-                },*/
-                /*source: [
-                    {title: "Firefox"},
-                    {title: "Opera"},
-                    ],*/
-
-                //searchFields : ['name'],
-                    /*[
-                    {title: "Firefox"},
-                    {title: "Opera"},
-                    ],*/
                 onSelect: function(result, response) {
                     //location.href = "/categorie/" + result.title;
                     $.ajax({

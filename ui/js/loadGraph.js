@@ -30,11 +30,11 @@ labelState = testCustomDisplay("labelState", "on");
  * pour éviter que le même fichier soit renvoyer dans les deux cas.
  * */
 if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname))
-    loadGraph("/data/subCategory.json", shapeColor); // deuxième paramètre ?
+    loadGraph("/data/subCategory.json", shapeColor); 
 else if (/sous-categorie/i.test(location.pathname))
-    loadGraph("/data/software.json", shapeColor); // deuxième paramètre ?
+    loadGraph("/data/software.json", shapeColor); 
 else
-    loadGraph("data/category.json", "silver"); // deuxième paramètre ?
+    loadGraph("data/category.json", "silver");
 
 // Chargement du graphe
 function loadGraph(dataFile)
@@ -224,15 +224,6 @@ function loadGraph(dataFile)
           .style("fill", labelColor)
           .text(function(d) { return d.name; });
     }
-
-    //~ var images = gnodes.append("image")
-      //~ .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Wilber-gimp.png/96px-Wilber-gimp.png")
-      //~ .attr("x", 0)
-      //~ .attr("y", 0)
-      //~ .attr("width", 80)
-      //~ .attr("height", 80)
-      //~ .on("click", function(d) {alert(d.name);});
-
     // On enlève l'écouteur d'événement (clic) sur le premier nœud (central)
     d3.select('.node').on('click', null);
 
