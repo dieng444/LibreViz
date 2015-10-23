@@ -4,7 +4,7 @@ LibreViz est une application développée par Macky Dieng (dieng444) et Baptiste
 
 ## Présentation fonctionnelle de l'application
 
-LibreViz offre une expérience de visualisation originale et hautement interactive des logiciels libres sous GNU/Linux, à partir de données issues de Wikipédia. L'utilisateur peut configurer la zone de visualisation comme il l'entend, en choisissant ses couleurs, ses formes, le niveau de zoom, la position de la zone d'affichage, etc. Pour des raisons évidentes d'ergonomie, la plupart de ces configurations sont enregistrées temporairement (mais facilement réinitialisables) afin que l'utilisateur ait une expérience cohérente, quelle que soit la page visitée. En outre, pour le plus grand bonheur des libristes, la chanson du logiciel libre (au format OGG !) pourra accompagner vos recherches. :D
+LibreViz offre une expérience de visualisation originale et hautement interactive des logiciels libres sous GNU/Linux, à partir de données issues de Wikipédia. L'utilisateur peut configurer la zone de visualisation comme il l'entend, en choisissant ses couleurs, ses formes, le niveau de zoom, la position de la zone d'affichage, etc. Pour des raisons évidentes d'ergonomie, la plupart de ces configurations sont enregistrées temporairement (mais facilement réinitialisables) afin que l'utilisateur ait une expérience cohérente, quelle que soit la page visitée. En outre, pour le plus grand bonheur des libristes, la chanson du logiciel libre (au format Ogg !) pourra accompagner vos recherches. :D
 
 Par défaut, au chargement de l'application, l'utilisateur peut voir le graphe qui va servir de navigation pour découvrir de nouveaux logiciels. Au tout début du processus de navigation, l'utilisateur a le choix entre un certain nombre de catégories. S'il décide de cliquer sur une catégorie en particulier, il est amené vers un nouveau graphe qui affiche toutes les sous-catégories de la catégorie sélectionnée. Si l'utilisateur sélectionne ensuite une sous-catégorie, l'application lui présente tous les logiciels présents dans cette sous-catégorie. Et enfin, si l'utilisateur clique sur un logiciel, l'application lui fournit des informations plus détaillées sur ce dernier. Bien sûr, si l'utilisateur cherche des informations sur un logiciel en particulier, il n'est pas nécessaire de naviguer de cette façon dans la hiérarchie des catégories et sous-catégories. Dans ce cas de figure, il est tout à fait possible de taper directement le nom du logiciel dans le moteur de recherche prévu à cet effet.
 
@@ -38,3 +38,5 @@ Côté front-end, l'application s'articule autour de plusieurs technologies : D3
 ## Le mot de la fin
 
 LibreViz : en route vers le logiciel libre ! :)
+
+![GNU/Linux (FSF)](https://upload.wikimedia.org/wikipedia/commons/8/80/Gnu-and-penguin-color.png)
