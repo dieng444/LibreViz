@@ -7,10 +7,7 @@
 
 import scrapy
 
-
 class FramasoftItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     name = scrapy.Field()
     category = scrapy.Field()
     subcategory = scrapy.Field()
@@ -22,11 +19,23 @@ class FramasoftItem(scrapy.Item):
     version = scrapy.Field()
     description = scrapy.Field()
 
-class WikipediaItem(scrapy.Item):
+class WikipediaRowItem(scrapy.Item):
     categorie = scrapy.Field()
     fonctionnalite = scrapy.Field()
-    logiciel_proprietaire = scrapy.Field()
-    logiciel_libre_windows = scrapy.Field()
-    logiciel_libre_linux = scrapy.Field()
-    logiciel_libre_mac = scrapy.Field()
-    logiciel_libre_bsd = scrapy.Field()
+    logiciels_proprietaires = scrapy.Field()
+    logiciels_libres_windows = scrapy.Field()
+    logiciels_libres_linux = scrapy.Field()
+    logiciels_libres_mac = scrapy.Field()
+    logiciels_libres_bsd = scrapy.Field()
+
+class WikipediaSoftwareItem(scrapy.Item):
+    nom = scrapy.Field()
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
+    developpeurs = scrapy.Field()
+    version = scrapy.Field()
+    technologies = scrapy.Field() 
+    langues = scrapy.Field()
+    licences = scrapy.Field()
+    site = scrapy.Field()
+    description = scrapy.Field()

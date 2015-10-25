@@ -14,7 +14,6 @@ BOT_NAME = 'floss'
 SPIDER_MODULES = ['floss.spiders']
 NEWSPIDER_MODULE = 'floss.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'framasoft (+http://www.yourdomain.com)'
 
@@ -61,12 +60,20 @@ NEWSPIDER_MODULE = 'floss.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+
 ITEM_PIPELINES = {
-    'floss.pipelines.MongoPipeline': 300,
+    'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
+    'floss.pipelines.RowsItemsPipeline': 2,
+    'floss.pipelines.SofwareItemsPipeline': 3
 }
 
-MONGO_URI = 'mongodb://localhost:27017/'
-MONGODB_DATABASE = 'floss'
+IMAGES_STORE = '/home/bada/Documents/DNR2I/M2/systeme/crawling-project/floss/images'
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "floss"
+MONGODB_ROWS_COLLECTION = "rows_items"
+MONGODB_SOFTWARE_COLLECTION = "software_items"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
