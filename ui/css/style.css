@@ -42,6 +42,15 @@ div#info-links {
     text-align: center;
 }
 
+.description .header {
+    display: inline !important;
+    margin: 0 !important;
+}
+
+#description {
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 1400px) {
 
     img#tablet {
