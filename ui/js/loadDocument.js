@@ -206,7 +206,9 @@ function parseSoftwareInfo (data) {
 				content+= '<i class="users icon"></i>\n\
 						   <div class="ui header"> Développeur(s) : </div>';
 								for (i in item.developpeurs) {
+									if (item.developpeurs[i]!=", ") {
 				content+= '<span class="ui tag label">'+item.developpeurs[i]+'</span>';
+									}
 								}
 							}
 							if (item.version!=" ") {
