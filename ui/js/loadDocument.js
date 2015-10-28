@@ -211,7 +211,7 @@ function parseSoftwareInfo (data) {
 									}
 								}
 							}
-							if (item.version!=" ") {
+							if (item.version!="") {
 				  content+='<br><i class="history icon"></i>\n\
 							<div class="ui header">Version : </div>\n\
 							<span >'+item.version+'</span><br>';
@@ -237,13 +237,13 @@ function parseSoftwareInfo (data) {
 					content+='<span class="ui tag label">'+item.licences[i]+'</span>';
 								}
 							}
-							if (item.site!=" " && item.site!="Site officiel") {
+							if (item.site!=" " && item.site!="Site officiel" && item.site!="") {
 			  content+= '<br><i class="world icon"></i>\n\
 						 <div class="ui header">Site web :</div>\n\
 						 <a id="site-web" href="http://'+item.site+'" target="_blank">'+item.site+'</a>';
 							}
 							if (item.description!=" ") {
-				content+='<div id="description">'+item.description+'</div>';
+				content+='<div id="description"><p>'+item.description+'</p></div>';
 							}
 			content+='</div>\n\
 				</div>';
