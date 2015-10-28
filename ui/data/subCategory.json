@@ -1,37 +1,34 @@
 {
   "nodes": [
     {
-      "name": "Internet"
+      "name": "Bureautique"
     },
     {
-      "name": "Navigateur Web"
+      "name": "Suite bureautique"
     },
     {
-      "name": "Client de messagerie"
+      "name": "Traitement de texte"
     },
     {
-      "name": "Client de "
+      "name": "Système de gestion de base de données"
     },
     {
-      "name": "Visioconférence"
+      "name": "Tableur"
     },
     {
-      "name": "Client "
+      "name": "Création de diagrammes"
     },
     {
-      "name": "Client IRC"
+      "name": "Création de présentations"
     },
     {
-      "name": "Client "
+      "name": "Gestion de projets"
     },
     {
-      "name": "Voix sur réseau IP"
+      "name": "Groupware"
     },
     {
-      "name": "Gestionnaire de téléchargement"
-    },
-    {
-      "name": "Lecteur multimédia"
+      "name": "Comptabilité personnelle"
     }
   ],
   "links": [
@@ -70,10 +67,6 @@
     {
       "source": 0,
       "target": 9
-    },
-    {
-      "source": 0,
-      "target": 10
     }
   ]
 }

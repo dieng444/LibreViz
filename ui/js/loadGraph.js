@@ -128,10 +128,12 @@ function loadGraph(dataFile)
             //Variable contenant l'url temporaire en formaté
             var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
             //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-            if (/categorie/i.test(location.pathname))
+            if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname)) {
                 fullUrl = "/sous-categorie/" + tmp_url;
-            else if (/sous-categorie/i.test(location.pathname))
-                fullUrl = "/logiciel/" + tmp_url;
+			} else if (/sous-categorie/i.test(location.pathname)) {
+                ajaxSend(tmp_url);
+                return;
+			}
             else
                 fullUrl = "/categorie/" + tmp_url;
 
@@ -165,10 +167,12 @@ function loadGraph(dataFile)
             //Variable contenant l'url temporaire en formaté
             var tmp_url = tab_s.length > 1 ? url.substr(0, url.length - 1).trim() : cleaned_url;
             //Dynamisation du lien des noeuds en fonction du graph encours (catégorie, sous-catégorie...)
-            if (/categorie/i.test(location.pathname))
+            if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname)) {
                 fullUrl = "/sous-categorie/" + tmp_url;
-            else if (/sous-categorie/i.test(location.pathname))
-                fullUrl = "/logiciel/" + tmp_url;
+			} else if (/sous-categorie/i.test(location.pathname)) {
+                ajaxSend(tmp_url);
+                return;
+			}
             else
                 fullUrl = "/categorie/" + tmp_url;
 
@@ -204,8 +208,7 @@ function loadGraph(dataFile)
             if (/categorie/i.test(location.pathname) && !/sous-categori/i.test(location.pathname)) {
                 fullUrl = "/sous-categorie/" + tmp_url;
 			} else if (/sous-categorie/i.test(location.pathname)) {
-                loadDocument.ajax.send(tmp_url);
-                loadDocument.showPopup();
+                ajaxSend(tmp_url);
                 return;
 			}
             else

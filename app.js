@@ -9,52 +9,10 @@ var ejs = require('ejs');
 
 var app = express();
 /**
- * Test d'insertion des logiciels dans mongoDB
- * */
-var addSoftwares = function(db, callback) {
-  var collection = db.collection('softwares');
-  collection.insert(
-        {
-            name: "Firefox",
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
-                         Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
-                         Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
-                         Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
-                         risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
-                         tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
-                         at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
-                         dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
-                         dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
-                         Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
-                         Donec gravida pharetra leo, at posuere lacus sodales et',
-            version:"40",
-            image:"test.png"
-        });
-
-    collection.insert(
-        {
-            name: "Opera",
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\
-                         Phasellus et auctor arcu. Aenean faucibus elementum ultrices.\n\
-                         Aliquam id nunc eget lacus facilisis fringilla sed rutrum sem.\n\
-                         Cras quis nunc arcu. Vivamus vehicula nulla neque, ac tristique\n\
-                         risus efficitur sit amet. Sed eget feugiat mi. Maecenas dictum\n\
-                         tellus elit, quis cursus turpis rhoncus quis. Nunc lobortis mi\n\
-                         at urna condimentum, at placerat elit sodales. Vestibulum ut \n\
-                         dui et ante tincidunt malesuada a et odio. Morbi id suscipit \n\
-                         dui, et accumsan massa. Duis semper sem vel pellentesque efficitur. \n\
-                         Nunc iaculis justo non nisl dictum, sed mattis ex eleifend. \n\
-                         Donec gravida pharetra leo, at posuere lacus sodales et',
-            version: "40",
-            image:"test.png"
-        });
-   //callback(result);
-}
-/**
  * Recherche des catégories
  * */
 var findCategories = function(db, callback) {
-  var collection = db.collection('items');
+  var collection = db.collection('rows_items');
   collection.distinct("categorie",function(err, result) {
     callback(result);
   });
@@ -63,7 +21,7 @@ var findCategories = function(db, callback) {
  * Recherche des sous-catégories
  * */
 var findSubCategories = function(category,db,callback) {
-  var collection = db.collection('items');
+  var collection = db.collection('rows_items');
    collection.find({categorie:category},{fonctionnalite:1}).toArray(function(err, result) {
     callback(result);
   });
@@ -72,8 +30,8 @@ var findSubCategories = function(category,db,callback) {
  * Recherche les logiciels d'une sous-catégorie donnée
  * */
 var findSoftwaresBySubCategory = function(subCategory,db,callback) {
-  var collection = db.collection('items');
-   collection.find({fonctionnalite:subCategory},{logiciel_libre_linux:1}).toArray(function(err, result) {
+  var collection = db.collection('rows_items');
+   collection.find({fonctionnalite:subCategory},{logiciels_libres_linux:1}).toArray(function(err, result) {
     callback(result);
   });
 }
@@ -81,8 +39,8 @@ var findSoftwaresBySubCategory = function(subCategory,db,callback) {
  * Recherche les informations d'un logiciel donné
  * */
 var findSoftwareInfos = function(software,db,callback) {
-  var collection = db.collection('softwares');
-   collection.find({name:software}).toArray(function(err, result) {
+  var collection = db.collection('software_items');
+   collection.find({nom:software}).toArray(function(err, result) {
     callback(result);
   });
 }
@@ -90,8 +48,8 @@ var findSoftwareInfos = function(software,db,callback) {
  * Recherche les logiciels correspondant au critère de recherche
  * */
 var findSoftwares = function(param,db,callback) {
-  var collection = db.collection('softwares');
-   collection.find({name: new RegExp(param,'i')}).toArray(function(err, result) {
+  var collection = db.collection('software_items');
+   collection.find({nom: new RegExp(param,'i')}).toArray(function(err, result) {
     callback(result);
   });
 }
@@ -115,10 +73,10 @@ function parser(result,fileName,type,param)
             links[i] = {"source":0,"target":j};
         }
         else if (type=="subCategory") { //Formatage des sous-catégories
-            items[i] = {"name":result[i].fonctionnalite[0]};
+            items[i] = {"name":result[i].fonctionnalite};
             links[i] = {"source":0,"target":j};
         } else { //Formatage des logiciels
-            var sfw_tab = result[i].logiciel_libre_linux;
+            var sfw_tab = result[i].logiciels_libres_linux;
             for (var k=0, l=1;  k < sfw_tab.length; k++,l++) {
                 items[k] = {"name":sfw_tab[k]};
                 links[k] = {"source":0,"target":l};
@@ -151,10 +109,6 @@ function loadDataMongo(type, param)
 {
     MongoClient.connect(url, function(err, db) {
         console.log("Connected correctly to server");
-        //~ addSoftwares(db,function(){
-            //~ console.log("data inserted successfully");
-            //~ db.close();
-        //~ });
         if(type=="category") {
             findCategories(db, function(result) {
                 parser(result,'ui/data/category.json',"category");
