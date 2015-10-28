@@ -196,45 +196,49 @@ function parseSoftwareInfo (data) {
 			 content+='<div class="ui small image">\n\
 							<img id="logo" src="/images/'+item.images[0].path+'" alt="'+item.nom+'">\n\
 						</div>';
+					} else {
+			 content+='<div class="ui small image">\n\
+							<img id="logo" src="/images/default_image.png">\n\
+						</div>';
 					}
 				content+='<div class="description">';
 							if (item.developpeurs.length > 0) {
 				content+= '<i class="users icon"></i>\n\
-						   <div class="ui header"> Développeur(s) : </div><br>';
+						   <div class="ui header"> Développeur(s) : </div>';
 								for (i in item.developpeurs) {
-				content+= '<span style="margin-left:30px;">'+item.developpeurs[i]+'</span><br>';
+				content+= '<span class="ui tag label">'+item.developpeurs[i]+'</span>';
 								}
 							}
 							if (item.version!=" ") {
-				  content+='<i class="history icon"></i>\n\
-							<div class="ui header">Version : <br></div>\n\
-							<span style="margin-left:30px;">'+item.version+'</span><br>';
+				  content+='<br><i class="history icon"></i>\n\
+							<div class="ui header">Version : </div>\n\
+							<span >'+item.version+'</span><br>';
 							}
 							if (item.technologies.length > 0) {
 				 content+= '<i class="code icon"></i>\n\
-							<div class="ui header"> Technologie(s) : </div><br>';
+							<div class="ui header"> Technologie(s) : </div>';
 								for (i in item.technologies) {
-				  content+='<span style="margin-left:30px;">'+item.technologies[i]+'</span><br>';
+				  content+='<span class="ui tag label">'+item.technologies[i]+'</span>';
 								}
 							}
 							if (item.langues.length > 0) {
-				 content+='<i class="translate icon"></i>\n\
-						   <div class="ui header"> Langue(s) : </div><br>';
+				 content+='<br><i class="translate icon"></i>\n\
+						   <div class="ui header"> Langue(s) : </div>';
 								for (i in item.langues) {
-				content+='<span style="margin-left:30px;">'+item.langues[i]+'</span><br>';
+				content+='<span class="ui tag label">'+item.langues[i]+'</span>';
 								}
 							}
 							if (item.licences.length > 0) {
-				content+='<i class="copyright icon"></i>\n\
-						  <div class="ui header"> Licence(s) : </div><br>';
+				content+='<br><i class="copyright icon"></i>\n\
+						  <div class="ui header"> Licence(s) : </div>';
 								for (i in item.licences) {
-					content+='<span style="margin-left:30px;">'+item.licences[i]+'</span><br>';
+					content+='<span class="ui tag label">'+item.licences[i]+'</span>';
 								}
 							}
 							if (item.site!=" " && item.site!="Site officiel") {
-			  content+= '<i class="world icon"></i>\n\
+			  content+= '<br><i class="world icon"></i>\n\
 						 <div class="ui header">Site web :</div>\n\
-						 <a id="site-web" href="http://'+item.site+'" target="_blank">'+item.site+'</a><br>';
+						 <a id="site-web" href="http://'+item.site+'" target="_blank">'+item.site+'</a>';
 							}
 							if (item.description!=" ") {
 				content+='<div id="description">'+item.description+'</div>';
