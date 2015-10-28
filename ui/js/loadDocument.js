@@ -200,42 +200,36 @@ function parseSoftwareInfo (data) {
 				content+='<div class="description">';
 							if (item.developpeurs.length > 0) {
 				content+= '<i class="users icon"></i>\n\
-						   <div class="ui header"> Développeur(s) : <br>';
+						   <div class="ui header"> Développeur(s) : </div><br>';
 								for (i in item.developpeurs) {
-					content+= '<span style="margin-left:30px;">'+item.developpeurs[i]+'</span><br>';
+				content+= '<span style="margin-left:30px;">'+item.developpeurs[i]+'</span><br>';
 								}
-				content+= '</div>';
 							}
 							if (item.version!=" ") {
 				  content+='<i class="history icon"></i>\n\
-							<div class="ui header">Version : <br>\n\
-								<span style="margin-left:30px;">'+item.version+'</span>\n\
-							</div><br>';
+							<div class="ui header">Version : <br></div>\n\
+							<span style="margin-left:30px;">'+item.version+'</span><br>';
 							}
 							if (item.technologies.length > 0) {
 				 content+= '<i class="code icon"></i>\n\
-							<div class="ui header"> Technologie(s) : <br>';
+							<div class="ui header"> Technologie(s) : </div><br>';
 								for (i in item.technologies) {
-					 content+='<span style="margin-left:30px;">'+item.technologies[i]+'</span><br>';
+				  content+='<span style="margin-left:30px;">'+item.technologies[i]+'</span><br>';
 								}
-				  content+='</div>';
 							}
 							if (item.langues.length > 0) {
 				 content+='<i class="translate icon"></i>\n\
-						   <div class="ui header"> Langue(s) : <br>';
+						   <div class="ui header"> Langue(s) : </div><br>';
 								for (i in item.langues) {
-					content+='<span style="margin-left:30px;">'+item.langues[i]+'</span><br>';
+				content+='<span style="margin-left:30px;">'+item.langues[i]+'</span><br>';
 								}
-				 content+='</div>';
 							}
-							;
 							if (item.licences.length > 0) {
 				content+='<i class="copyright icon"></i>\n\
-						  <div class="ui header"> Licence(s) : <br>';
+						  <div class="ui header"> Licence(s) : </div><br>';
 								for (i in item.licences) {
 					content+='<span style="margin-left:30px;">'+item.licences[i]+'</span><br>';
 								}
-				content+='</div>';
 							}
 							if (item.site!=" " && item.site!="Site officiel") {
 			  content+= '<i class="world icon"></i>\n\
