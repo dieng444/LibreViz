@@ -46,5 +46,5 @@ class WikipediaSpider(scrapy.Spider):
         logiciel['langues'] = response.xpath("//table[@class='infobox_v2']/tr/th/a[@title='Internationalisation (informatique)']/../../td/a/text()").extract()
         logiciel['licences'] = response.xpath("//table[@class='infobox_v2']/tr/th/a[@title='Licence de logiciel']/../../td/a/text()").extract()
         logiciel['site'] = "".join(response.xpath("//table[@class='infobox_v2']/tr/th/a[@title='Site web']/../../td/a[1]/text()").extract())
-        logiciel['description'] = "".join(response.xpath("//div[@id='mw-content-text']/*[not(self::table[@class='infobox_v2'])]").extract())
+        logiciel['description'] = "".join(response.xpath("//div[@id='mw-content-text']/p[1]//text()").extract())
         yield logiciel

@@ -54,7 +54,7 @@ var findSoftwares = function(param,db,callback) {
   });
 }
 
-var url = 'mongodb://localhost:27017/crawlingproject';
+var url = 'mongodb://localhost:27017/floss';
 var items;
 var links;
 var subCategories = [];
